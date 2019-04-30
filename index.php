@@ -103,8 +103,6 @@
         }
     }
 
-    echo(power(11, 1));
-
     /* /ШЕСТОЕ ЗАДАНИЕ */
 ?>
 
@@ -140,9 +138,7 @@
 
     <article>
         <h3>Шестое задание</h3>
-        <p>
-
-        </p>
+        <p><?php echo(power(11, 2)); ?> </p>
     </article>
     <footer>
         <?php echo('Год: ' . date(Y)) ?>
