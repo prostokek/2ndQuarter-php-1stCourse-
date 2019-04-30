@@ -88,6 +88,24 @@
                 return divide($arg1, $arg2);
         }
     }
+
+    /* /ЧЕТВЁРТОЕ ЗАДАНИЕ */
+
+    /* ШЕСТОЕ ЗАДАНИЕ */
+
+    function power($val, $pow) {
+        if ($pow == 0) {
+            return 1;
+        } elseif ($pow == 1) {
+            return $val;
+        } else {
+            return $val * power($val, $pow-1);
+        }
+    }
+
+    echo(power(11, 1));
+
+    /* /ШЕСТОЕ ЗАДАНИЕ */
 ?>
 
 <!DOCTYPE html>
