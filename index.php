@@ -1,9 +1,113 @@
+<?php 
+    $title = '2ndLesson';
+    $h1 = 'Второй урок';
+
+    /* ПЕРВОЕ ЗАДАНИЕ */
+
+    $a = 10;
+    $b = 20;
+    if ($a >0 && $b > 0) {
+        $c = $a - $b;
+        $result_1 = "Разность a и b = $c"  ;
+    } elseif ($a < 0 && $b < 0) {
+        $c = $a * $b;
+        $result_1 = "Произведение a и b = $c";
+    } else {
+        $c = $a + $b;
+        $result_1 = "Сумма a и b = $c";
+    };
+
+    /* /ПЕРВОЕ ЗАДАНИЕ */
+
+    /* ВТОРОЕ ЗАДАНИЕ */
+    $z = 7;
+    $result_2 = "";
+    switch ($z) {
+        case 1:
+            $result_2 .= "1 ";
+        case 2:
+            $result_2 .= "2 ";
+        case 3:
+            $result_2 .= "3 ";
+        case 4:
+            $result_2 .= "4 ";
+        case 5:
+            $result_2 .= "5 ";
+        case 6:
+            $result_2 .= "6 ";
+        case 7:
+            $result_2 .= "7 ";
+        case 8:
+            $result_2 .= "8 ";
+        case 9:
+            $result_2 .= "9 ";
+        case 10:
+            $result_2 .= "10 ";
+        case 11:
+            $result_2 .= "11 ";
+        case 12:
+            $result_2 .= "12 ";
+        case 13:
+            $result_2 .= "13 ";
+        case 14:
+            $result_2 .= "14 ";
+        case 15:
+            $result_2 .= "15 ";
+    };
+
+    /* /ВТОРОЕ ЗАДАНИЕ */
+
+    /* ТРЕТЬЕ ЗАДАНИЕ */
+
+    function add($q = 10, $w = 20) {
+        return $q + $w;
+    };
+    function subtract($q = 10, $w = 20) {
+        return $q - $w;
+    };
+    function multiply($q = 10, $w = 20) {
+        return $q * $w;
+    };
+    function divide($q = 10, $w = 20) {
+        return $q / $w;
+    };
+
+    /* /ТРЕТЬЕ ЗАДАНИЕ */
+
+    /* ЧЕТВЁРТОЕ ЗАДАНИЕ */
+
+    function mathOperation($arg1, $arg2, $operation) {
+        switch($operation) {
+            case 'add':
+                return add($arg1, $arg2);
+            case 'subtract':
+                return subtract($arg1, $arg2);
+            case 'multiply':
+                return multiply($arg1, $arg2);
+            case 'divide':
+                return divide($arg1, $arg2);
+        }
+    }
+
+    /* /ЧЕТВЁРТОЕ ЗАДАНИЕ */
+
+    /* ШЕСТОЕ ЗАДАНИЕ */
+
+    function power($val, $pow) {
+        if ($pow == 0) {
+            return 1;
+        } elseif ($pow == 1) {
+            return $val;
+        } else {
+            return $val * power($val, $pow-1);
+        }
+    }
+
+    /* /ШЕСТОЕ ЗАДАНИЕ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-    <?php 
-    $title = '1stLesson';
-    $h1 = 'Первый урок'
-    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +117,34 @@
 <body>
     <h1> <?php echo($h1) ?> </h1>
     <article>
-        <h3>Третье задание.</h3>
-        <p> 1) "var_dump($a == $b);" равняется True, так как при таком сравнении (с двумя знаками равенства) происходит приведение типов; <br>
-            2) "var_dump((int)'012345');" равняется 12345, так как функция (?) (int) приводит к целочисленному типу данных; <br>
-            3) "var_dump((float)123.0 === (int)123.0);" равняется false, так как при таком сравнении (3 знака равенства) не происходит приведения типов ((float)123.0 вернёт переменную дробночисленного типа, (int)123.0 -- целочисленного); <br>
-            4) "var_dump((int)0 === (int)'hello, world');", равняется true, так как "(int)'hello, world'" возвращает переменную целочисленного типа с значением 0.
-        </p>
+        <h3>Первое задание</h3>
+        <p><?php echo($result_1); ?></p>
+    </article>
+
+    <article>
+        <h3>Второе задание</h3>
+        <p><?php echo($result_2); ?></p>
+    </article>
+
+    <article>
+        <h3>Третье задание</h3>
+        <p>Используется в четвёртом</p>
+    </article>
+
+    <article>
+        <h3>Четвёртое задание</h3>
+        <p><?php echo(mathOperation(15, 10, 'divide')); ?></p>
+    </article>
+
+    <article>
+        <h3>Шестое задание</h3>
+        <p><?php echo(power(11, 2)); ?> </p>
+    </article>
+
+    <article>
+        <h3>Седьмое задание</h3>
+        <p><?php echo(date("H часов i минут")); ?> <br>
+        Суперсильно не хочу изводиться со склонениями, если подскажете относительно быстрый (в реализации) способ (при условии наличия такового) — буду благодарен</p>
     </article>
     <footer>
         <?php echo('Год: ' . date(Y)) ?>
