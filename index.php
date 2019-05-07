@@ -119,7 +119,7 @@
 
     /* /ШЕСТОЕ ЗАДАНИЕ */
 
-    /* СЕДЬМОЕ ЗАДАНИЕ */
+    /* ВОСЬМОЕ ЗАДАНИЕ */
 
     $res_8 = '';
     $regions = [
@@ -146,7 +146,22 @@
             }
         };
 
-    /* /СЕДЬМОЕ ЗАДАНИЕ */
+    /* /ВОСЬМОЕ ЗАДАНИЕ */
+
+    /* ДЕВЯТОЕ ЗАДАНИЕ */
+
+    function constructURL($string = 'Нет фантазии, проверка', $key = [], $value = []) {
+        if ($key == [] && $value == []) {
+            global $ruLetters, $enLetters;
+            $key = $ruLetters;
+            $value = $enLetters;
+        }
+        // var_dump($key);
+        $temp = str_replace($key, $value, $string);
+        return str_replace([' '], ['_'], $temp);
+    }
+
+    /* /ДЕВЯТОЕ ЗАДАНИЕ */
 ?>
 
 <!DOCTYPE html>
@@ -303,6 +318,11 @@ p {
     <article>
         <h3>Восьмое задание</h3>
         <p><?php echo($res_8); ?></p>
+    </article>
+
+    <article>
+        <h3>Девятое задание</h3>
+        <p><?php echo constructURL($string = 'Здесь можно указать значение'); ?></p>
     </article>
     
     <footer>
