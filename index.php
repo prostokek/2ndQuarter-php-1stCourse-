@@ -121,7 +121,7 @@
 
     /* СЕДЬМОЕ ЗАДАНИЕ */
 
-    $res_7 = '';
+    $res_8 = '';
     $regions = [
         'Московская область:' => [
             'Москва', 'Зеленоград', 'Клин'
@@ -134,13 +134,13 @@
         ]
         ];
         foreach ($regions as $region => $cities) {
-            $res_7 .= "$region<br>";
+            $res_8 .= "$region<br>";
             for($y = 0; $y < count($cities); $y++) {
                 if ($cities[$y][0] == 'K') {
                     if($y == (count($cities) - 1)) {
-                        $res_7 .=  "$cities[$y];<br>";
+                        $res_8 .=  "$cities[$y];<br>";
                     } else {
-                        $res_7 .=  "$cities[$y], ";
+                        $res_8 .=  "$cities[$y], ";
                     }
                 }
             }
@@ -301,8 +301,8 @@ p {
     </article>
 
     <article>
-        <h3>Седьмое задание</h3>
-        <p><?php echo($res_7); ?></p>
+        <h3>Восьмое задание</h3>
+        <p><?php echo($res_8); ?></p>
     </article>
     
     <footer>
