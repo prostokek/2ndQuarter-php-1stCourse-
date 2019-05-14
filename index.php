@@ -37,12 +37,12 @@
     
     /* /ВТОРОЕ ЗАДАНИЕ */
 
-    /* ТРЕТЬЕ ЗАДАНИЕ */
+    /* ЧЕТВЁРТОЕ */
 
     $date = date(r);
-    file_put_contents('3rdTask_log.txt', PHP_EOL . "$date", FILE_APPEND);
+    file_put_contents('4thTask_log.txt', PHP_EOL . "$date", FILE_APPEND);
 
-    /* /ТРЕТЬЕ ЗАДАНИЕ */
+    /* /ЧЕТВЁРТОЕ ЗАДАНИЕ */
 ?>
 
 <!DOCTYPE html>
