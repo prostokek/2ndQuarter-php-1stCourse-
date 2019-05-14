@@ -37,12 +37,24 @@
     
     /* /ВТОРОЕ ЗАДАНИЕ */
 
-    /* ЧЕТВЁРТОЕ */
+    /* ЧЕТВЁРТОЕ ЗАДАНИЕ*/
 
     $date = date(r);
-    file_put_contents('4thTask_log.txt', PHP_EOL . "$date", FILE_APPEND);
+    file_put_contents('4thTask_log.txt', "$date" . PHP_EOL, FILE_APPEND);
 
     /* /ЧЕТВЁРТОЕ ЗАДАНИЕ */
+
+    /* ПЯТОЕ ЗАДАНИЕ */
+    $log_count = (count(scandir(__DIR__ . '/Logs')) - 2);
+
+    file_put_contents(__DIR__ . '/Logs/log.txt', "$date" . PHP_EOL, FILE_APPEND);
+    
+    if(sizeof(file (__DIR__ . '/Logs/log.txt')) > 9) { //количество строк в файле превышает 9 (равняется 10)
+        copy(__DIR__ . '/Logs/log.txt', __DIR__ . "/Logs/log$log_count.txt"); //создаём копию под определённым номером
+        file_put_contents(__DIR__ . '/Logs/log.txt', ''); //опустошаем
+    };
+
+    /* /ПЯТОЕ ЗАДАНИЕ */
 ?>
 
 <!DOCTYPE html>
