@@ -4,24 +4,37 @@
 
     /* ПЕРВОЕ ЗАДАНИЕ */
 
-    $gallery = [
+    $gallery1 = [
         "/Gallery/image0019.jpg",
         "/Gallery/ru-city-780.jpg",
         "/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg"
     ];
 
-    $res_1 = '<div class = "gallery">';
-    foreach($gallery as $pic) {
-        $res_1 .= "<a href='$pic' target='_blank'><img src='$pic' alt=''></a>";
-    };
-    $res_1 .= '</div>';
+    function BuildGallery1($gallery1) {
+        $gallery1HTML = '<div class = "gallery">';
+        foreach($gallery1 as $picPath) {
+            $gallery1HTML .= "<a href='$picPath' target='_blank'><img src='$picPath' alt=''></a>";
+        };
+        $gallery1HTML .= '</div>';
+        return $gallery1HTML;
+    }
 
     /* /ПЕРВОЕ ЗАДАНИЕ */
 
     /* ВТОРОЕ ЗАДАНИЕ */
 
-    $res_2 = "";
-
+    function BuildGallery2() {
+        $gallery2 = scandir(__DIR__ . '/Gallery');
+        unset($gallery2[0], $gallery2[1]);
+    
+        $gallery2HTML = '<div class = "gallery">';
+        foreach($gallery2 as $picPath) {
+            $gallery2HTML .= "<a href='/Gallery/$picPath' target='_blank'><img src='/Gallery/$picPath' alt=''></a>";
+        }
+        $gallery2HTML .= '</div>';
+        return $gallery2HTML;
+    }
+    
     /* /ВТОРОЕ ЗАДАНИЕ */
 ?>
 
@@ -45,10 +58,13 @@
 
     <article>
         <h3>Первое задание</h3>
-        <p><?php echo($res_1); ?></p>
+        <p><?php echo(BuildGallery1($gallery1)); ?></p>
     </article>
     
-
+    <article>
+        <h3>Второе задание</h3>
+        <p><?php echo(BuildGallery2()); ?></p>
+    </article>
     
     <footer>
         <?php echo('Год: ' . date(Y)) ?>
