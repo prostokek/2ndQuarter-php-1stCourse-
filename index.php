@@ -36,6 +36,13 @@
     }
     
     /* /ВТОРОЕ ЗАДАНИЕ */
+
+    /* ТРЕТЬЕ ЗАДАНИЕ */
+
+    $date = date(r);
+    file_put_contents('3rdTask_log.txt', PHP_EOL . "$date", FILE_APPEND);
+
+    /* /ТРЕТЬЕ ЗАДАНИЕ */
 ?>
 
 <!DOCTYPE html>
