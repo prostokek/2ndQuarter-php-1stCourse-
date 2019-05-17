@@ -16,9 +16,11 @@ $sql_homeWork = "SELECT pic_id, path, name, viewCount FROM gallery"; //запр�
 
 
     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
-        for($i = 0; $i < count($picData); $i++) {
-            var_dump($picData); echo '<hr>';
-            if($i == $picData['pic_id']) {
+        // for($i = 0; $i < count($picData); $i++) {
+            // var_dump($picData); echo '<hr>';
+            $picId = (int)$picData['pic_id'];
+            var_dump($picId);
+            if($_GET['pic_id'] == $picId) {
                 $html = <<<php
         <!DOCTYPE html>
         <html lang="ru">
@@ -34,10 +36,10 @@ $sql_homeWork = "SELECT pic_id, path, name, viewCount FROM gallery"; //запр�
         </html>
 
 php;
-break;
+// break;
             };
         };
-    };
+    // };
 
 
 //     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
