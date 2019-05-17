@@ -51,7 +51,8 @@
     };
     
 
-    $sql = "SELECT id, fio, login, password, date FROM users";
+    $sql = "SELECT id, fio, login, password, date FROM users"; 
+    
 
     $res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
     // $row = mysqli_fetch_assoc($res); //вытащили из него ряд в виде ассоциативного массива (по очереди вытаскиевает (с 0-ого))
@@ -68,7 +69,8 @@ php;
 
 // ДОМАШНЕЕ ЗАДАНИЕ
 
-$sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery";
+$sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery ORDER BY gallery.viewCount DESC";
+// SELECT * FROM `gallery` ORDER BY `gallery`.`viewCount` DESC
 
     $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
@@ -77,6 +79,7 @@ $sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery";
         $sql_homeWork .= <<<php
         <a href="/galleryScript.php?pic_id={$picData['pic_id']}">
         <img src="{$picData['path']}" alt="" width = 400px></a>
+        <p>Количество просмотров: {$picData['viewCount']}</p>
 php;
 
 };

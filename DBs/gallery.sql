@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 17 2019 г., 18:20
+-- Время создания: Май 17 2019 г., 19:34
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -31,18 +31,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `gallery` (
   `pic_id` int(11) NOT NULL,
   `path` varchar(64) NOT NULL COMMENT 'Путь к картинке',
-  `viewCount` int(10) NOT NULL DEFAULT '0' COMMENT 'Количество просмотров',
-  `picPageHTML` text NOT NULL
+  `name` text NOT NULL,
+  `viewCount` int(10) NOT NULL DEFAULT '0' COMMENT 'Количество просмотров'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `gallery`
 --
 
-INSERT INTO `gallery` (`pic_id`, `path`, `viewCount`, `picPageHTML`) VALUES
-(1, '/Gallery/ru-city-780.jpg', 0, ''),
-(2, '/Gallery/image0019.jpg', 0, ''),
-(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 0, '');
+INSERT INTO `gallery` (`pic_id`, `path`, `name`, `viewCount`) VALUES
+(1, '/Gallery/ru-city-780.jpg', 'ru-city-780', 6),
+(2, '/Gallery/image0019.jpg', 'image0019', 3),
+(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 'Tokyo', 8);
 
 --
 -- Индексы сохранённых таблиц

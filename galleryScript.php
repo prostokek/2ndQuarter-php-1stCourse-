@@ -7,57 +7,33 @@ $link = mysqli_connect(  //подключаемся к базе данных
     '2ndquarter-php-1stcourse-' //название базы данных
 ); 
 
-$sql_homeWork = "SELECT pic_id, path, name, viewCount FROM gallery"; //запрос = получить информацию о картинках
+$sql = "SELECT pic_id, path, name, viewCount FROM gallery"; //запрос = получить информацию о картинках
 
-    $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+$res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
-    // $picData = mysqli_fetch_assoc($res_homeWork);
-    
-
-
-    while ($picData = mysqli_fetch_assoc($res_homeWork)) {
-        // for($i = 0; $i < count($picData); $i++) {
-            // var_dump($picData); echo '<hr>';
-            $picId = (int)$picData['pic_id'];
-            var_dump($picId);
-            if($_GET['pic_id'] == $picId) {
-                $html = <<<php
-        <!DOCTYPE html>
-        <html lang="ru">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>{$picData['name']}</title>
-        </head>
-        <body>
-            <img src="{$picData['path']}" alt="" width = 700px>
-        </body>
-        </html>
-
+while ($picData = mysqli_fetch_assoc($res)) {
+    $picId = (int)$picData['pic_id'];
+    if($_GET['pic_id'] == $picId) {
+        $viewCountUpdated = $picData['viewCount'] + 1;
+        $sqlUpdateViewCount = "UPDATE gallery SET viewCount = $viewCountUpdated WHERE pic_id = $picId";
+        mysqli_query($link, $sqlUpdateViewCount);
+        $html = <<<php
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{$picData['name']}</title>
+    </head>
+    <body>
+        <img src="{$picData['path']}" alt="" width = 700px>
+        <p>Количество просмотров: {$picData['viewCount']}</p>
+    </body>
+    </html>
 php;
-// break;
-            };
-        };
-    // };
+    };
+};
 
-
-//     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
-//         $html = <<<php
-//     <!DOCTYPE html>
-//     <html lang="ru">
-//     <head>
-//         <meta charset="UTF-8">
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//         <title>{$picData['name']}</title>
-//     </head>
-//     <body>
-//         <img src="{$picData['path']}" alt="" width = 700px>
-//     </body>
-//     </html>
-
-// php;
-//     }
     echo $html;
 ?>
