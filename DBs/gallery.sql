@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 17 2019 г., 19:34
+-- Время создания: Май 17 2019 г., 19:50
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -42,7 +42,8 @@ CREATE TABLE `gallery` (
 INSERT INTO `gallery` (`pic_id`, `path`, `name`, `viewCount`) VALUES
 (1, '/Gallery/ru-city-780.jpg', 'ru-city-780', 6),
 (2, '/Gallery/image0019.jpg', 'image0019', 3),
-(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 'Tokyo', 8);
+(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 'Tokyo', 8),
+(6, '/Gallery/cities-to-visit-once-20.jpg', 'cities-to-visit-once', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -62,7 +63,7 @@ ALTER TABLE `gallery`
 -- AUTO_INCREMENT для таблицы `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `pic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
