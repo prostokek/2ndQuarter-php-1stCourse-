@@ -24,7 +24,7 @@
     // КАК СДЕЛАТЬ ТАК, ЧТОБЫ ID УСТАНАВЛИВАЛСЯ АВТОМАТИЧЕСКИ (я это пропустил, видимо)
 
 
-    // ЗАДАНИЯ ТЕКУЩЕГО УРОКА
+    // ВЫПОЛНЕНО НА УРОКЕ
 
     $link = mysqli_connect(  //подключаемся к базе данных
         '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
@@ -56,17 +56,40 @@
     $res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
     // $row = mysqli_fetch_assoc($res); //вытащили из него ряд в виде ассоциативного массива (по очереди вытаскиевает (с 0-ого))
 
-    $html = '';
+    $res_1 = '';
     while ($row = mysqli_fetch_assoc($res)) {
-        $html .= <<<php
+        $res_1 .= <<<php
         <h1>{$row['login']}</h1>
         <a href="?id={$row['id']}">Delete user</a>
         <hr>
 php;
 };
+// /ВЫПОЛНЕНО НА УРОКЕ
 
-echo $html;
+// ДОМАШНЕЕ ЗАДАНИЕ
+
+$sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery";
+
+    $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+
+    $sql_homeWork = '';
+    while ($picData = mysqli_fetch_assoc($res_homeWork)) {
+        $sql_homeWork .= <<<php
+        <a href="?pic_id={$picData['pic_id']}">
+        <img src="{$picData['path']}" alt="" width = 400px></a>
+php;
+
+if($_GET['pic_id'] == $picData['pic_id']) {
+    // $sql_picPageHTML = "$picData['picPageHTML']";
+    $picPageHTML = "<img src="{$picData['path']}" alt="">"
+};
+};
+
+
+
 ?>
+
+<img src="{$row['path']}" alt="">
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -79,18 +102,23 @@ echo $html;
 <body>
 
 <h1> <?php echo($h1);?> </h1>
-<h1>ПОЧЕМУ НЕ УДАЛИТЬ ЭЛЕМЕНТ С ID = 0?</h1>
+    <article style='background: aqua'>
+        <h3>Выполнено на уроке</h3>
+        <p><?php echo $res_1 ?></p>
+
+        <form>
+            <input type = 'text' name='login'>
+            <input type = 'text' name='password'>
+            <input type = 'submit'>
+        </form>
+    </article>
+
     <article>
-        <h3>Первое задание</h3>
-        <p><?php ?></p>
+        <h3>Домашнее задание</h3>
+        <p><?php echo $sql_homeWork ?></p>
     </article>
     
-
-    <form>
-        <input type = 'text' name='login'>
-        <input type = 'text' name='password'>
-        <input type = 'submit'>
-    </form>
+    
     <footer>
         <?php echo('Год: ' . date(Y)) ?>
     </footer>
