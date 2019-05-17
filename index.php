@@ -75,21 +75,14 @@ $sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery";
     $sql_homeWork = '';
     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
         $sql_homeWork .= <<<php
-        <a href="?pic_id={$picData['pic_id']}">
+        <a href="/galleryScript.php?pic_id={$picData['pic_id']}">
         <img src="{$picData['path']}" alt="" width = 400px></a>
 php;
 
-if($_GET['pic_id'] == $picData['pic_id']) {
-    // $sql_picPageHTML = "$picData['picPageHTML']";
-    $picPageHTML = "<img src="{$picData['path']}" alt="">"
 };
-};
-
 
 
 ?>
-
-<img src="{$row['path']}" alt="">
 
 <!DOCTYPE html>
 <html lang="ru">
