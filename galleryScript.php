@@ -11,22 +11,51 @@ $sql_homeWork = "SELECT pic_id, path, name, viewCount FROM gallery"; //запр�
 
     $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
+    // $picData = mysqli_fetch_assoc($res_homeWork);
+    
+
+
     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
-        $html = <<<php
-    <!DOCTYPE html>
-    <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{$picData['name']}</title>
-    </head>
-    <body>
-        <img src="{$picData['path']}" alt="" width = 700px>
-    </body>
-    </html>
+        for($i = 0; $i < count($picData); $i++) {
+            var_dump($picData); echo '<hr>';
+            if($i == $picData['pic_id']) {
+                $html = <<<php
+        <!DOCTYPE html>
+        <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>{$picData['name']}</title>
+        </head>
+        <body>
+            <img src="{$picData['path']}" alt="" width = 700px>
+        </body>
+        </html>
 
 php;
-    }
+break;
+            };
+        };
+    };
+
+
+//     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
+//         $html = <<<php
+//     <!DOCTYPE html>
+//     <html lang="ru">
+//     <head>
+//         <meta charset="UTF-8">
+//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+//         <title>{$picData['name']}</title>
+//     </head>
+//     <body>
+//         <img src="{$picData['path']}" alt="" width = 700px>
+//     </body>
+//     </html>
+
+// php;
+//     }
     echo $html;
 ?>
