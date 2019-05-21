@@ -15,7 +15,7 @@
     $log_count = (count(scandir(__DIR__ . '/Logs')) - 2);
     file_put_contents(__DIR__ . '/Logs/log.txt', "$date" . PHP_EOL, FILE_APPEND);
     
-    if(sizeof(file (__DIR__ . '/Logs/log.txt')) > 499) { //количество строк в файле превышает 9 (равняется 10)
+    if(sizeof(file (__DIR__ . '/Logs/log.txt')) > 499) { //количество строк в файле превышает 499 (равняется 500)
         copy(__DIR__ . '/Logs/log.txt', __DIR__ . "/Logs/log$log_count.txt"); //создаём копию под определённым номером
         file_put_contents(__DIR__ . '/Logs/log.txt', ''); //опустошаем
     };
