@@ -1,12 +1,5 @@
 <?php 
 
-$link = mysqli_connect(  //подключаемся к базе данных
-    '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
-    'root', //имя пользователя
-    '', // пароль
-    '2ndquarter-php-1stcourse-' //название базы данных
-); 
-
 $sql = "SELECT pic_id, path, name, viewCount FROM gallery"; //запрос = получить информацию о картинках
 
 $res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
@@ -34,6 +27,5 @@ while ($picData = mysqli_fetch_assoc($res)) {
 php;
     };
 };
-
     echo $html;
 ?>

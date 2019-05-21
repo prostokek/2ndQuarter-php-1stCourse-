@@ -1,6 +1,6 @@
 <?php 
-    $title = 'Пятый урок';
-    $h1 = 'Пятый урок';
+    $title = 'Шестой урок';
+    $h1 = 'Шестой урок';
 
     function varDump($var) { //человеческий вывод var_dump() (не в одну строку)
         static $int=0;
@@ -77,12 +77,20 @@ $sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery ORDER BY gallery.vi
     $sql_homeWork = '';
     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
         $sql_homeWork .= <<<php
-        <a href="/galleryScript.php?pic_id={$picData['pic_id']}">
+        <a href="/?page=gallery&pic_id={$picData['pic_id']}">
         <img src="{$picData['path']}" alt="" width = 400px></a>
         <p>Количество просмотров: {$picData['viewCount']}</p>
 php;
 
 };
+// varDump($_GET);
+switch($_GET['page']) {
+    case 'gallery': include('pages/gallery.php'); break;
+    case 'addPic': include('pages/addPic.php'); break;
+}
+// if (($_GET['page'] == 'addPic')) {
+//     include('/pages/addPic.php');
+// }
 
 
 ?>

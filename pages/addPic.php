@@ -1,30 +1,22 @@
 <?php
 
-$link = mysqli_connect(  //подключаемся к базе данных
-        '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
-        'root', //имя пользователя
-        '', // пароль
-        '2ndquarter-php-1stcourse-' //название базы данных
-    );
-
 if(!empty($_GET['path'])) {
     $path = "/Gallery/{$_GET['path']}";
     $name = $_GET['name'];
     $sql_insert = "INSERT INTO gallery (path, name) 
     VALUES ('{$path}', '{$name}')";
     mysqli_query($link, $sql_insert);
-    header('Location: /addPic.php');
+    // header('Location: /addPic.php');
 };
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Добавление картинки</title>
 </head>
 <body>
     <form>
