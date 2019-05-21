@@ -34,20 +34,8 @@ php;
 
 ?>
 
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>users</title>
-</head>
-<body>
-
-<h1>users</h1>
     <article style='background: aqua'>
-        <h3>Выполнено на уроке</h3>
+        <h3>Пользователи</h3>
         <p><?php echo $usersList ?></p>
 
         <form> <!-- Добавление -->
@@ -58,9 +46,3 @@ php;
             <input type = 'submit'>
         </form> <!-- пользователей-->
     </article>
-
-    <footer>
-        <?php echo('Год: ' . date(Y)) ?>
-    </footer>
-</body>
-</html>

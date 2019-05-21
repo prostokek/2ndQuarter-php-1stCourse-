@@ -1,6 +1,15 @@
 <?php 
     $title = 'Шестой урок';
     $h1 = 'Шестой урок';
+    $headerMenuInclusion = "<?php include('pages/headerMenu.php')?>";
+    $headerMenu = <<<php
+    <ul>
+        <li><a href="">Главная страница</a></li>
+        <li><a href="">Галерея</a></li>
+        <li><a href="">Пользователи</a></li>
+        <li><a href="">Добавить картинку</a></li>
+    </ul>
+php;
 
     function varDump($var) { //человеческий вывод var_dump() (не в одну строку)
         static $int=0;
@@ -28,12 +37,38 @@
         '2ndquarter-php-1stcourse-' //название базы данных
     ); 
 
-switch($_GET['page']) {
-    case 'singlePic': include('pages/singlePic.php'); break;
-    case 'addPic': include('pages/addPic.php'); break;
-    case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
-    case 'gallery': include('pages/gallery.php'); break;
-    default: include('pages/mainPage.php'); break;
-};
+// switch($_GET['page']) {
+//     case 'singlePic': include('pages/singlePic.php'); break;
+//     case 'addPic': include('pages/addPic.php'); break;
+//     case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
+//     case 'gallery': include('pages/gallery.php'); $title = 'huy'; break;
+//     default: include('pages/mainPage.php'); break;
+// };
 ?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?php echo $title ?></title>
+</head>
+<body>
+    <h1><?php echo $title ?></h1>
+    <?php include('/pages/headerMenu.php'); ?>
+
+    <?php
+        switch($_GET['page']) {
+            case 'singlePic': include('pages/singlePic.php'); break;
+            case 'addPic': include('pages/addPic.php'); break;
+            case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
+            case 'gallery': include('pages/gallery.php'); $title = 'huy'; break;
+            default: include('pages/mainPage.php'); break;
+        };
+    ?>
+
+    <?php include('/pages/footer.php'); ?>
+</body>
+</html>
 
