@@ -22,6 +22,9 @@ while ($picData = mysqli_fetch_assoc($res)) {
     <body>
         <img src="{$picData['path']}" alt="" width = 700px>
         <p>Количество просмотров: {$picData['viewCount']}</p>
+        <footer>
+            <?php echo('Год: ' . date(Y)) ?>
+        </footer>
     </body>
     </html>
 php;
