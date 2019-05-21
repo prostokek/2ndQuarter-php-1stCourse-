@@ -1,15 +1,6 @@
 <?php 
     $title = 'Шестой урок';
     $h1 = 'Шестой урок';
-    $headerMenuInclusion = "<?php include('pages/headerMenu.php')?>";
-    $headerMenu = <<<php
-    <ul>
-        <li><a href="">Главная страница</a></li>
-        <li><a href="">Галерея</a></li>
-        <li><a href="">Пользователи</a></li>
-        <li><a href="">Добавить картинку</a></li>
-    </ul>
-php;
 
     function varDump($var) { //человеческий вывод var_dump() (не в одну строку)
         static $int=0;
@@ -35,15 +26,7 @@ php;
         'root', //имя пользователя
         '', // пароль
         '2ndquarter-php-1stcourse-' //название базы данных
-    ); 
-
-// switch($_GET['page']) {
-//     case 'singlePic': include('pages/singlePic.php'); break;
-//     case 'addPic': include('pages/addPic.php'); break;
-//     case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
-//     case 'gallery': include('pages/gallery.php'); $title = 'huy'; break;
-//     default: include('pages/mainPage.php'); break;
-// };
+    );
 ?>
 
 <!DOCTYPE html>
@@ -71,4 +54,3 @@ php;
     <?php include('/pages/menus/footer.php'); ?>
 </body>
 </html>
-
