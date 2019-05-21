@@ -56,7 +56,7 @@ php;
 </head>
 <body>
     <h1><?php echo $title ?></h1>
-    <?php include('/pages/headerMenu.php'); ?>
+    <?php include('/pages//menus/headerMenu.php'); ?>
 
     <?php
         switch($_GET['page']) {
@@ -68,7 +68,7 @@ php;
         };
     ?>
 
-    <?php include('/pages/footer.php'); ?>
+    <?php include('/pages/menus/footer.php'); ?>
 </body>
 </html>
 
