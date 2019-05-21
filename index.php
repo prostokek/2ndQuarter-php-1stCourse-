@@ -21,11 +21,6 @@
     };
     /* /СОЗДАНИЕ ЛОГОВ */
 
-    // КАК СДЕЛАТЬ ТАК, ЧТОБЫ ID УСТАНАВЛИВАЛСЯ АВТОМАТИЧЕСКИ (я это пропустил, видимо)
-
-
-    // ВЫПОЛНЕНО НА УРОКЕ
-
     $link = mysqli_connect(  //подключаемся к базе данных
         '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
         'root', //имя пользователя
@@ -33,61 +28,65 @@
         '2ndquarter-php-1stcourse-' //название базы данных
     ); 
 
-    if(!empty($_GET['login']) && !empty($_GET['password'])) {
-        $login = $_GET['login'];
-        $password = $_GET['login'];
+    // ДОБАВЛЕНИЕ И ОТОБРАЖЕНИЕ ПОЛЬЗОВАТЕЛЕЙ
 
-        $sql_add = "INSERT INTO users(login, password)
-        VALUES ('{$login}', '{$password}')";
-        mysqli_query($link, $sql_add);
-        // header('Location: /');
-    };
+//     if(!empty($_GET['login']) && !empty($_GET['password'])) {
+//         $login = $_GET['login'];
+//         $password = $_GET['login'];
 
-    if(!empty($_GET['id'])) {
-        $id = (int)$_GET['id'];
-        $sql_delete = "DELETE FROM users WHERE id = $id";
-        mysqli_query($link, $sql_delete);
-        header('Location: /'); //дабы '?id=значение' не оставалось в адресе (просто перезапрашивает страницу с определённым адресом)
-    };
+//         $sql_add = "INSERT INTO users(login, password)
+//         VALUES ('{$login}', '{$password}')";
+//         mysqli_query($link, $sql_add);
+//         // header('Location: /');
+//     };
+
+//     if(!empty($_GET['id'])) {
+//         $id = (int)$_GET['id'];
+//         $sql_delete = "DELETE FROM users WHERE id = $id";
+//         mysqli_query($link, $sql_delete);
+//         header('Location: /'); //дабы '?id=значение' не оставалось в адресе (просто перезапрашивает страницу с определённым адресом)
+//     };
     
 
-    $sql = "SELECT id, fio, login, password, date FROM users"; 
+//     $sql = "SELECT id, fio, login, password, date FROM users"; 
     
 
-    $res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
-    // $row = mysqli_fetch_assoc($res); //вытащили из него ряд в виде ассоциативного массива (по очереди вытаскиевает (с 0-ого))
+//     $res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+//     // $row = mysqli_fetch_assoc($res); //вытащили из него ряд в виде ассоциативного массива (по очереди вытаскиевает (с 0-ого))
 
-    $res_1 = '';
-    while ($row = mysqli_fetch_assoc($res)) {
-        $res_1 .= <<<php
-        <h1>{$row['login']}</h1>
-        <a href="?id={$row['id']}">Delete user</a>
-        <hr>
-php;
-};
-// /ВЫПОЛНЕНО НА УРОКЕ
+//     $res_1 = '';
+//     while ($row = mysqli_fetch_assoc($res)) {
+//         $res_1 .= <<<php
+//         <h1>{$row['login']}</h1>
+//         <a href="?id={$row['id']}">Delete user</a>
+//         <hr>
+// php;
+// };
+// /ДОБАВЛЕНИЕ И ОТОБРАЖЕНИЕ ПОЛЬЗОВАТЕЛЕЙ
 
 // ДОМАШНЕЕ ЗАДАНИЕ
 
-$sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery ORDER BY gallery.viewCount DESC";
-// SELECT * FROM `gallery` ORDER BY `gallery`.`viewCount` DESC
+// $sql_homeWork = "SELECT pic_id, path, viewCount FROM gallery ORDER BY gallery.viewCount DESC";
 
-    $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+//     $res_homeWork = mysqli_query($link, $sql_homeWork) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
-    $sql_homeWork = '';
-    while ($picData = mysqli_fetch_assoc($res_homeWork)) {
-        $sql_homeWork .= <<<php
-        <a href="/?page=gallery&pic_id={$picData['pic_id']}">
-        <img src="{$picData['path']}" alt="" width = 400px></a>
-        <p>Количество просмотров: {$picData['viewCount']}</p>
-php;
+//     $sql_homeWork = '';
+//     while ($picData = mysqli_fetch_assoc($res_homeWork)) {
+//         $sql_homeWork .= <<<php
+//         <a href="/?page=singlePic&pic_id={$picData['pic_id']}">
+//         <img src="{$picData['path']}" alt="" width = 400px></a>
+//         <p>Количество просмотров: {$picData['viewCount']}</p>
+//php;
 
-};
+// };
 // varDump($_GET);
 switch($_GET['page']) {
-    case 'gallery': include('pages/gallery.php'); break;
+    case 'singlePic': include('pages/singlePic.php'); break;
     case 'addPic': include('pages/addPic.php'); break;
-}
+    case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
+    case 'gallery': include('pages/gallery.php'); break;
+    // default: include('pages/mainPage'); break;
+};
 // if (($_GET['page'] == 'addPic')) {
 //     include('/pages/addPic.php');
 // }
@@ -106,21 +105,21 @@ switch($_GET['page']) {
 <body>
 
 <h1> <?php echo($h1);?> </h1>
-    <article style='background: aqua'>
+    <!-- <article style='background: aqua'>
         <h3>Выполнено на уроке</h3>
-        <p><?php echo $res_1 ?></p>
+        <p> //echo $res_1 </p>
 
         <form>
             <input type = 'text' name='login'>
             <input type = 'text' name='password'>
             <input type = 'submit'>
         </form>
-    </article>
+    </article> -->
 
-    <article>
+    <!-- <article>
         <h3>Домашнее задание</h3>
-        <p><?php echo $sql_homeWork ?></p>
-    </article>
+        <p> //echo $sql_homeWork </p>
+    </article> -->
     
     
     <footer>
