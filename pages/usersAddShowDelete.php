@@ -9,7 +9,7 @@ if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == '
 
     $res_loginSearch = mysqli_query($link, $sql_loginSearch) or die(mysqli_error($link));
 
-    $sql_add = "INSERT INTO users(login, password)
+    $sql_addUser = "INSERT INTO users(login, password)
     VALUES ('{$login}', '{$password}')";
 
     while ($userData = mysqli_fetch_assoc($res_loginSearch)) {
@@ -18,7 +18,7 @@ if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == '
         };
     };
     if ($count === 0) {
-        mysqli_query($link, $sql_add);
+        mysqli_query($link, $sql_addUser);
     };
 };
 
