@@ -8,14 +8,14 @@ if(!empty($_GET['login']) && !empty($_GET['password']) && $_GET['query'] == 'add
     VALUES ('{$login}', '{$password}')";
     mysqli_query($link, $sql_add);
     // header('Location: /?page=usersAddShowDelete');
+    
 };
 
 if(!empty($_GET['id']) && $_GET['query'] == 'deleteUser') {
     $id = (int)$_GET['id'];
-    varDump($_GET);
     $sql_delete = "DELETE FROM users WHERE id = $id";
     mysqli_query($link, $sql_delete);
-    // header('Location: /'); //дабы '?id=значение' не оставалось в адресе (просто перезапрашивает страницу с определённым адресом)
+    header('Location: /?page=usersAddShowDelete');
 };
 
 $sql = "SELECT id, fio, login, password, date FROM users"; 
