@@ -12,6 +12,7 @@ $title = 'Шестой урок';
         case 'calc1': include('pages/calc1.php'); break;
         case 'calc2': include('pages/calc2.php'); break;
         case 'catalogue': include('pages/catalogue.php'); break;
+        case 'product':include('pages/product.php'); break;
         default: include('pages/pageTemplate.php'); break;
     };
 
