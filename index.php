@@ -9,6 +9,8 @@ $title = 'Шестой урок';
         case 'addPic': include('pages/addPic.php'); break;
         case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
         case 'gallery': include('pages/gallery.php'); break;
+        case 'calc1': include('pages/calc1.php'); break;
+        case 'calc2': include('pages/calc2.php'); break;
         default: include('pages/pageTemplate.php'); break;
     };
 
@@ -20,6 +22,8 @@ $title = 'Шестой урок';
         <li><a href="?page=gallery">Галерея</a></li>
         <li><a href="?page=usersAddShowDelete">Пользователи</a></li>
         <li><a href="?page=addPic">Добавить картинку</a></li>
+        <li><a href="?page=calc1">Калькулятор 1</a></li>
+        <li><a href="?page=calc2">Калькулятор 2</a></li>
     </ul>
 php;
 
