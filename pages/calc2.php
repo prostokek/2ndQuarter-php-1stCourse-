@@ -26,7 +26,6 @@ $content = <<<php
         <p><input type="radio" name = 'operation' value = 'multiplication'>Умножить</p>
         <p><input type="radio" name = 'operation' value = 'division'>Разделить</p>
         <input type = 'submit' value = 'Посчитать'>
-
     </form>
     <p>
     {$calc2_res}
