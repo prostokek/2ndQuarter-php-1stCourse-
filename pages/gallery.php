@@ -15,6 +15,6 @@ while ($picData = mysqli_fetch_assoc($res_gallery)) {
     <p>Количество просмотров: {$picData['viewCount']}</p>
 php;
 };
-$title = 'gal';
+$title = 'Галерея';
 $content = $galleryHTML;
 ?>

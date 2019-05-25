@@ -8,6 +8,8 @@ function varDump($var) { //человеческий вывод var_dump() (не 
         $int++;
     }; 
 
+const PUBLIC_DIR = __DIR__;
+
     /* СОЗДАНИЕ ЛОГОВ */
 $date = date(r);
 $log_count = (count(scandir(__DIR__ . '/Logs')) - 2);

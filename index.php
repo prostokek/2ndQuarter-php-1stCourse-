@@ -2,6 +2,8 @@
 
 include('config.php');
 
+$title = 'Шестой урок';
+
     switch($_GET['page']) { //контроллер выбора страниц
         case 'singlePic': include('pages/singlePic.php'); break;
         case 'addPic': include('pages/addPic.php'); break;
@@ -11,8 +13,6 @@ include('config.php');
     };
 
     // РАБОТА НАД HTML
-    
-    
 
     $headerMenu = <<<php
     <ul>
@@ -31,7 +31,6 @@ php;
 php;
 
     $pageFile = file_get_contents('pages/pageTemplate.php');
-    echo $title;
     $pageWithTitle = str_replace('{TITLE}', $title, $pageFile);
     $pageWithHeaderMenu = str_replace('{HEADER_MENU}', $headerMenu, $pageWithTitle);
     $pageWithFooter = str_replace ('{FOOTER}', $footer, $pageWithHeaderMenu);
