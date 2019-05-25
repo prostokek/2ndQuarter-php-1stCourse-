@@ -7,9 +7,12 @@ if(!empty($_GET['pathToPic'])) {
     mysqli_query($link, $sql_insert);
     // header('Location: /addPic.php');
 };
-?>
+
+$content = <<<php
     <form>
         <input type = 'text' name='pathToPic' placeholder = 'Путь до картинки'>
         <input type = 'text' name='name' placeholder = 'Название картинки'>
         <input type = 'submit'>
     </form>
+php;
+?>

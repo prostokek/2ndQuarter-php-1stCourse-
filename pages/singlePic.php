@@ -17,5 +17,5 @@ while ($picData = mysqli_fetch_assoc($res_singlePic)) {
 php;
     };
 };
-echo $singlePicHTML;
+$content = $singlePicHTML;
 ?>

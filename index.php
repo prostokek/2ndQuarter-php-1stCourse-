@@ -1,6 +1,4 @@
-<?php 
-    $title = 'Шестой урок';
-    $h1 = 'Шестой урок';
+<?php
 
     function varDump($var) { //человеческий вывод var_dump() (не в одну строку)
         static $int=0;
@@ -27,30 +25,41 @@
         '', // пароль
         '2ndquarter-php-1stcourse-' //название базы данных
     );
+
+    switch($_GET['page']) { //контроллер выбора страниц
+        case 'singlePic': include('pages/singlePic.php'); break;
+        case 'addPic': include('pages/addPic.php'); break;
+        case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
+        case 'gallery': include('pages/gallery.php'); $title = 'huy'; break;
+        default: include('pages/mainPage.php'); break;
+    };
+
+    // РАБОТА НАД HTML
+    
+    $title = 'Шестой урок';
+
+    $headerMenu = <<<php
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="?page=gallery">Галерея</a></li>
+        <li><a href="?page=usersAddShowDelete">Пользователи</a></li>
+        <li><a href="?page=addPic">Добавить картинку</a></li>
+    </ul>
+php;
+
+    $date = date(Y);
+    $footer = <<<php
+    <footer>
+        Год: {$date}
+    </footer>
+php;
+
+    $pageFile = file_get_contents('pages/mainPage.php');
+    $pageWithTitle = str_replace('{TITLE}', $title, $pageFile);
+    $pageWithHeaderMenu = str_replace('{HEADER_MENU}', $headerMenu, $pageWithTitle);
+    $pageWithFooter = str_replace ('{FOOTER}', $footer, $pageWithHeaderMenu);
+    $pageWithContent = str_replace('{CONTENT}', $content, $pageWithFooter);
+    echo $pageWithContent;
+
+    // /РАБОТА НАД HTML
 ?>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $title ?></title>
-</head>
-<body>
-    <h1><?php echo $title ?></h1>
-    <?php include('/pages//menus/headerMenu.php'); ?>
-
-    <?php
-        switch($_GET['page']) {
-            case 'singlePic': include('pages/singlePic.php'); break;
-            case 'addPic': include('pages/addPic.php'); break;
-            case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
-            case 'gallery': include('pages/gallery.php'); $title = 'huy'; break;
-            default: include('pages/mainPage.php'); break;
-        };
-    ?>
-
-    <?php include('/pages/menus/footer.php'); ?>
-</body>
-</html>

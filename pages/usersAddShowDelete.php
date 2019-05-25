@@ -41,11 +41,12 @@ while ($userData = mysqli_fetch_assoc($res)) {
 php;
 };
 
-?>
 
+
+$content = <<<php
     <article style='background: aqua'>
         <h3>Пользователи</h3>
-        <p><?php echo $usersList ?></p>
+        {$usersList}
 
         <form action='?page=usersAddShowDelete' method='POST'> <!-- Добавление -->
             <input type = 'text' name = 'login'>
@@ -54,3 +55,5 @@ php;
             <input type = 'submit' value = 'Добавить пользователя'>
         </form> <!-- пользователей-->
     </article>
+php;
+?>

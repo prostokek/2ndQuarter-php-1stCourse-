@@ -16,5 +16,5 @@ while ($picData = mysqli_fetch_assoc($res_gallery)) {
 php;
 };
 
-echo $galleryHTML;
+$content = $galleryHTML;
 ?>
