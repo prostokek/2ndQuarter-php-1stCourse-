@@ -1,10 +1,11 @@
 <?php
 if(!empty($_GET['pathToPic'])) {
+    // стоит ли применять clearStr()?
     $pathToPic = "/Gallery/{$_GET['pathToPic']}";
     $name = $_GET['name'];
     $sql_insert = "INSERT INTO gallery (path, name) 
     VALUES ('{$pathToPic}', '{$name}')";
-    mysqli_query($link, $sql_insert);
+    mysqli_query(connectToSQL(), $sql_insert);
     // header('Location: /addPic.php');
 };
 

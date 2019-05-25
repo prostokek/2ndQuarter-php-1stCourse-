@@ -2,7 +2,7 @@
 
 $sql_gallery = "SELECT pic_id, path, viewCount FROM gallery ORDER BY gallery.viewCount DESC";
 
-$res_gallery = mysqli_query($link, $sql_gallery) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+$res_gallery = mysqli_query(connectToSQL(), $sql_gallery) or die(mysqli_error(connectToSQL())); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
 $galleryHTML = <<<php
 <h1>Галерея</h1>
@@ -15,6 +15,6 @@ while ($picData = mysqli_fetch_assoc($res_gallery)) {
     <p>Количество просмотров: {$picData['viewCount']}</p>
 php;
 };
-
+$title = 'gal';
 $content = $galleryHTML;
 ?>

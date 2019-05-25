@@ -2,12 +2,12 @@
 $count = 0;
 
 if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == 'addUser') { // && query = addUser
-    $login = $_POST['login'];
-    $password = $_POST['password'];
+    $login = clearStr($_POST['login']);
+    $password = clearStr($_POST['password']);
 
     $sql_loginSearch = "SELECT login FROM users";
 
-    $res_loginSearch = mysqli_query($link, $sql_loginSearch) or die(mysqli_error($link));
+    $res_loginSearch = mysqli_query(connectToSQL(), $sql_loginSearch) or die(mysqli_error(connectToSQL()));
 
     $sql_addUser = "INSERT INTO users(login, password)
     VALUES ('{$login}', '{$password}')";
@@ -18,19 +18,19 @@ if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == '
         };
     };
     if ($count === 0) {
-        mysqli_query($link, $sql_addUser);
+        mysqli_query(connectToSQL(), $sql_addUser);
     };
 };
 
 if(!empty($_GET['id']) && $_GET['query'] == 'deleteUser') {
-    $id = (int)$_GET['id'];
+    $id = clearStr((int)$_GET['id']);
     $sql_delete = "DELETE FROM users WHERE id = $id";
-    mysqli_query($link, $sql_delete);
+    mysqli_query(connectToSQL(), $sql_delete);
 };
 
 $sql = "SELECT id, fio, login, password, date FROM users"; 
 
-$res = mysqli_query($link, $sql) or die(mysqli_error($link)); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+$res = mysqli_query(connectToSQL(), $sql) or die(mysqli_error(connectToSQL())); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
 $usersList = '';
 while ($userData = mysqli_fetch_assoc($res)) {
@@ -40,7 +40,6 @@ while ($userData = mysqli_fetch_assoc($res)) {
     <hr>
 php;
 };
-
 
 
 $content = <<<php
