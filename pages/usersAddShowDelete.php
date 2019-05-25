@@ -1,15 +1,24 @@
 <?php
 
-if(!empty($_GET['login']) && !empty($_GET['password']) && $_GET['query'] == 'addUser') { // && query = addUser
-    $login = $_GET['login'];
-    $password = $_GET['login'];
+if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == 'addUser') { // && query = addUser
+    $login = $_POST['login'];
+    $password = $_POST['password'];
 
     $sql_add = "INSERT INTO users(login, password)
     VALUES ('{$login}', '{$password}')";
     mysqli_query($link, $sql_add);
+    $_POST['login'] = null;
+    $_POST['password'] = null;
+    $_POST['query'] = null;
     // header('Location: /?page=usersAddShowDelete');
-    
 };
+
+varDump($_POST);
+    if (!empty($_POST['login'])) {
+        echo 'not empty';
+    } else {
+        echo 'empty';
+    };
 
 if(!empty($_GET['id']) && $_GET['query'] == 'deleteUser') {
     $id = (int)$_GET['id'];
@@ -38,10 +47,10 @@ php;
         <h3>Пользователи</h3>
         <p><?php echo $usersList ?></p>
 
-        <form> <!-- Добавление -->
+        <form action='?page=usersAddShowDelete' method='POST'> <!-- Добавление -->
             <input type = 'text' name='login'>
             <input type = 'text' name='password'>
-            <input type = 'hidden' name='page' value='usersAddShowDelete'>
+            <!-- <input type = 'hidden' name='page' value='usersAddShowDelete'> -->
             <input type = 'hidden' name='query' value='addUser'>
             <input type = 'submit'>
         </form> <!-- пользователей-->
