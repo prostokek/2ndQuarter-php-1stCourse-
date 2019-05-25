@@ -9,10 +9,13 @@
 <body>
     <h1>{TITLE}</h1>
 
+    <aside style='float: left; width:20%'>
     {HEADER_MENU}
+    </aside>
 
-    {CONTENT}
+    <main style='float: right; width: 80%'>{CONTENT}</main>
     <br>
+    <div style='float: right'></div>
     {FOOTER}
 </body>
 </html>
