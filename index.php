@@ -15,7 +15,7 @@ $title = 'Шестой урок';
         case 'product': include('pages/product.php'); break;
         case 'feedback': include('/pages/feedback.php'); break;
         case 'addProduct': include('/pages/addProduct.php'); break;
-        default: include('pages/pageTemplate.php'); break;
+        // default: echo $pageFile; break;
     };
 
     // РАБОТА НАД HTML
@@ -41,12 +41,18 @@ php;
     </footer>
 php;
 
-    $pageFile = file_get_contents('pages/pageTemplate.php');
-    $pageWithTitle = str_replace('{TITLE}', $title, $pageFile);
-    $pageWithHeaderMenu = str_replace('{HEADER_MENU}', $headerMenu, $pageWithTitle);
-    $pageWithFooter = str_replace ('{FOOTER}', $footer, $pageWithHeaderMenu);
-    $pageWithContent = str_replace('{CONTENT}', $content, $pageWithFooter);
-    echo $pageWithContent;
+
+$pageFile = file_get_contents('pages/pageTemplate.php');
+$pageFile = str_replace(['{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$title, $headerMenu, $content, $footer], $pageFile);
+echo $pageFile;
+
+
+    // $pageFile = file_get_contents('pages/pageTemplate.php');
+    // $pageWithTitle = str_replace('{TITLE}', $title, $pageFile);
+    // $pageWithHeaderMenu = str_replace('{HEADER_MENU}', $headerMenu, $pageWithTitle);
+    // $pageWithFooter = str_replace ('{FOOTER}', $footer, $pageWithHeaderMenu);
+    // $pageWithContent = str_replace('{CONTENT}', $content, $pageWithFooter);
+    // echo $pageWithContent;
 
     // /РАБОТА НАД HTML
 ?>

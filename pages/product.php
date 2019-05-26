@@ -5,7 +5,7 @@ $sql_singleProduct = "SELECT id, name, price, picPath, detailedInfo FROM product
 $res_singleProduct = mysqli_query(connectToSQL(), $sql_singleProduct) or die(mysqli_error(connectToSQL()));
 
 $productData = mysqli_fetch_assoc($res_singleProduct);
-
+$title = $productData['name'];
 $singleproductHTML = <<<php
 <title>{$productData['name']}</title>
 <img src="{$productData['picPath']}">
@@ -27,7 +27,7 @@ while ($productFeedbackData = mysqli_fetch_assoc($res_productFeedback)) {
     <p>Дата: {$productFeedbackDate}</p>
     <hr>
 php;
-
+};
 //
 
 if(!empty($_POST['nameOfSender']) && !empty($_POST['commentary']) && $_POST['query'] == 'addCommentaryToAProduct') {
@@ -58,5 +58,4 @@ php;
 
 
 $content = $singleproductHTML . $productFeedbackFullHTML;
-};
 ?>
