@@ -7,6 +7,7 @@ if(!empty($_POST['nameOfSender']) && !empty($_POST['commentary']) && $_POST['que
     VALUES ('{$nameOfSender}', '{$commentary}')";
 
     mysqli_query(connectToSQL(), $sql_addCommentary);
+    header('Location: /?page=feedback');
 };
 
 $sql_feedback = "SELECT nameOfSender, commentary, date FROM feedback ORDER BY feedback.date DESC";
@@ -28,7 +29,7 @@ $content = <<<php
         <h1>Оставить отзыв</h1>
         <form method='POST'>
         <input type = 'text' name = 'nameOfSender' placeholder = 'Имя отправителя'>
-        <input type = 'text' name = 'commentary' placeholder = 'Отзыв'>
+        <textarea name = 'commentary' placeholder = 'Отзыв'></textarea>
         <input type = 'hidden' name = 'query' value = 'addCommentary'>
         <input type = 'submit' value = 'Оставить отзыв'>
         </form>

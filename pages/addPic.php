@@ -10,19 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql_picSearch = "SELECT path FROM gallery";
     $res_picSearch = mysqli_query(connectToSQL(), $sql_picSearch) or die(mysqli_error(connectToSQL()));
 
-    echo $fileNameWithDir;
+    // echo $fileNameWithDir;
     while ($picData = mysqli_fetch_assoc($res_picSearch)) {
-        varDump($picData);
+        // varDump($picData);
         if ($fileNameWithDir == $picData['path']) { //если картинка с таким именем уже существует
             $count_pics++;
         };
     };
     if ($count_pics === 0) {
-        echo 'good';
         $sql_addPic = "INSERT INTO gallery(path, name) 
         VALUES ('{$fileNameWithDir}', '{$picName}')";
         mysqli_query(connectToSQL(), $sql_addPic);
     };
+    header('Location: /?page=addPic');
 };
 
 $content = <<<php

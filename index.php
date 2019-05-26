@@ -14,6 +14,7 @@ $title = 'Шестой урок';
         case 'catalogue': include('pages/catalogue.php'); break;
         case 'product': include('pages/product.php'); break;
         case 'feedback': include('/pages/feedback.php'); break;
+        case 'addProduct': include('/pages/addProduct.php'); break;
         default: include('pages/pageTemplate.php'); break;
     };
 
@@ -29,6 +30,7 @@ $title = 'Шестой урок';
         <li><a href="?page=calc2">Калькулятор 2</a></li>
         <li><a href="?page=catalogue">Каталог</a></li>
         <li><a href="?page=feedback">Отзывы</a></li>
+        <li><a href="?page=addProduct">Добавить продукт</a></li>
     </ul>
 php;
 
