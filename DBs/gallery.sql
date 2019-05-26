@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 26 2019 г., 03:55
+-- Время создания: Май 26 2019 г., 04:43
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -42,7 +42,7 @@ CREATE TABLE `gallery` (
 INSERT INTO `gallery` (`pic_id`, `path`, `name`, `viewCount`) VALUES
 (1, '/Gallery/ru-city-780.jpg', 'ru-city-780', 30),
 (2, '/Gallery/image0019.jpg', 'image0019', 5),
-(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 'Tokyo', 11),
+(3, '/Gallery/Tokyo_Tower_and_Tokyo_Sky_Tree_2011_January.jpg', 'Tokyo', 15),
 (6, '/Gallery/cities-to-visit-once-20.jpg', 'cities-to-visit-once', 13),
 (23, '/Gallery/samsungGalaxyS9.jpg', 'Samsung Galaxy S9', 0),
 (24, '/Gallery/sakura_cvetenie.jpg', 'Цветение сакуры', 9),
