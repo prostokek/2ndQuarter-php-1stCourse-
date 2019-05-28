@@ -1,4 +1,5 @@
 <?php
+$title = 'Аутентификация';
 $authCount = 0;
 
 $returnTolocation = $_SERVER['HTTP_REFERER'];

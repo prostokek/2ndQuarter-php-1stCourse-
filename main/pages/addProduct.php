@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['isAdmin'] == 'YES') {
 
             $fileNameWithDir = str_replace('\\', '/', $fileNameWithDir);
             $fileNameWithDir = str_replace('E:/OSPanel/domains/2ndQuarter-php-1stCourse-/public/', '', $fileNameWithDir);
-            // НА СЕРВЕРЕ НУЖНО БУДЕТ ЗАМЕНЯТЬ ДРУГУЮ СТРОКУ
+            // НА СЕРВЕРЕ НУЖНО БУДЕТ ЗАМЕНЯТЬ ДРУГУЮ СТРОКУ (путь же будет другим)
             $sql_addProduct = "INSERT INTO products(name, price, picPath)
             VALUES ('{$name}', '{$price}', '{$fileNameWithDir}')";
             mysqli_query(connectToSQL(), $sql_addProduct);

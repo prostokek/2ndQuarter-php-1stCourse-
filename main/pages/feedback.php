@@ -1,4 +1,5 @@
 <?php
+$title = 'Отзывы';
 if(!empty($_POST['nameOfSender']) && !empty($_POST['commentary']) && $_POST['query'] == 'addCommentary') {
     $nameOfSender = clearStr($_POST['nameOfSender']);
     $commentary = clearStr($_POST['commentary']);

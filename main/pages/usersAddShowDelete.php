@@ -1,4 +1,5 @@
 <?php
+$title = 'Пользователи';
 $count = 0;
 
 if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == 'addUser') { // && query = addUser
