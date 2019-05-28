@@ -1,5 +1,4 @@
 <?php
-
 function varDump($var) { //человеческий вывод var_dump() (не в одну строку)
         static $int=0;
         echo '<pre><b style="background: red;padding: 1px 5px;">'.$int.'</b> ';
@@ -7,8 +6,6 @@ function varDump($var) { //человеческий вывод var_dump() (не 
         echo '</pre>';
         $int++;
     }; 
-
-const PUBLIC_DIR = __DIR__;
 
     /* СОЗДАНИЕ ЛОГОВ */
 $date = date(r);
@@ -20,6 +17,12 @@ if(sizeof(file (__DIR__ . '/Logs/log.txt')) > 499) { //количество ст
     file_put_contents(__DIR__ . '/Logs/log.txt', ''); //опустошаем
 };
     /* /СОЗДАНИЕ ЛОГОВ */
+
+
+session_start();
+
+const PUBLIC_DIR = __DIR__;
+const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //
 
 function connectToSQL() {
     static $link;

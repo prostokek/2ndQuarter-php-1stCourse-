@@ -1,8 +1,7 @@
 <?php
-
 include('config.php');
 
-$title = 'Шестой урок';
+$title = 'Седьмой урок';
 
     switch($_GET['page']) { //контроллер выбора страниц
         case 'singlePic': include('pages/singlePic.php'); break;
@@ -15,8 +14,15 @@ $title = 'Шестой урок';
         case 'product': include('pages/product.php'); break;
         case 'feedback': include('/pages/feedback.php'); break;
         case 'addProduct': include('/pages/addProduct.php'); break;
+        case 'authPage': include('/pages/authPage.php'); break;
+        case 'logOut': 
+        $_SESSION['isLogged'] = 'NO';
+        $_SESSION['isAdmin'] = 'NO';
+        header('Location:' . $_SERVER['HTTP_REFERER']);
+        break;
         // default: echo $pageFile; break;
     };
+    var_dump($_SESSION);
 
     // РАБОТА НАД HTML
 
@@ -31,6 +37,7 @@ $title = 'Шестой урок';
         <li><a href="?page=catalogue">Каталог</a></li>
         <li><a href="?page=feedback">Отзывы</a></li>
         <li><a href="?page=addProduct">Добавить продукт</a></li>
+        <li><a href="?page=authPage">Авторизация</a></li>
     </ul>
 php;
 
@@ -42,17 +49,8 @@ php;
 php;
 
 
-$pageFile = file_get_contents('pages/pageTemplate.php');
+// $pageFile = file_get_contents('pages/pageTemplate.php');
+$pageFile = file_get_contents('../main/pages/pageTemplate.php');
 $pageFile = str_replace(['{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$title, $headerMenu, $content, $footer], $pageFile);
 echo $pageFile;
-
-
-    // $pageFile = file_get_contents('pages/pageTemplate.php');
-    // $pageWithTitle = str_replace('{TITLE}', $title, $pageFile);
-    // $pageWithHeaderMenu = str_replace('{HEADER_MENU}', $headerMenu, $pageWithTitle);
-    // $pageWithFooter = str_replace ('{FOOTER}', $footer, $pageWithHeaderMenu);
-    // $pageWithContent = str_replace('{CONTENT}', $content, $pageWithFooter);
-    // echo $pageWithContent;
-
-    // /РАБОТА НАД HTML
 ?>

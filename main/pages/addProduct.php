@@ -1,6 +1,6 @@
 <?php
 $count_addProduct = 0;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['isAdmin'] == 'YES') {
     if(!empty($_POST['name']) && !empty($_POST['price']) && $_POST['query'] == 'addProduct') {
         $name = clearStr($_POST['name']);
         $price = clearStr($_POST['price']);
