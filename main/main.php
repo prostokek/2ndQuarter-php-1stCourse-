@@ -5,7 +5,7 @@ $title = 'Седьмой урок';
 
     switch($_GET['page']) { //контроллер выбора страниц
         case 'singlePic': include('pages/singlePic.php'); break;
-        case 'addPic': include('pages/addPic.php'); break;
+        // case 'addPic': include('pages/addPic.php'); break;
         case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
         case 'gallery': include('pages/gallery.php'); break;
         case 'calc1': include('pages/calc1.php'); break;
@@ -31,7 +31,6 @@ $title = 'Седьмой урок';
         <li><a href="/">Главная страница</a></li>
         <li><a href="?page=gallery">Галерея</a></li>
         <li><a href="?page=usersAddShowDelete">Пользователи</a></li>
-        <li><a href="?page=addPic">Добавить картинку</a></li>
         <li><a href="?page=calc1">Калькулятор 1</a></li>
         <li><a href="?page=calc2">Калькулятор 2</a></li>
         <li><a href="?page=catalogue">Каталог</a></li>

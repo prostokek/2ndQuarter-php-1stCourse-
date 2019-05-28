@@ -1,4 +1,5 @@
 <?php
+$title = 'Добавить продукт';
 $count_addProduct = 0;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['isAdmin'] == 'YES') {
     if(!empty($_POST['name']) && !empty($_POST['price']) && $_POST['query'] == 'addProduct') {
@@ -14,10 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['isAdmin'] == 'YES') {
             };
         };
         if ($count_addProduct === 0) {
-            $fileNameWithDir = PUBLIC_DIR . '/productsPics/' . $_FILES['userFile']['name'];
+            $fileNameWithDir = str_replace('\\main', '/public', (PUBLIC_DIR . '/productsPics/')) . $_FILES['userFile']['name'];
             copy($_FILES['userFile']['tmp_name'], $fileNameWithDir);
+
             $fileNameWithDir = str_replace('\\', '/', $fileNameWithDir);
-            $fileNameWithDir = str_replace('E:/OSPanel/domains/2ndQuarter-php-1stCourse-', '', $fileNameWithDir);
+            $fileNameWithDir = str_replace('E:/OSPanel/domains/2ndQuarter-php-1stCourse-/public/', '', $fileNameWithDir);
+            // НА СЕРВЕРЕ НУЖНО БУДЕТ ЗАМЕНЯТЬ ДРУГУЮ СТРОКУ
             $sql_addProduct = "INSERT INTO products(name, price, picPath)
             VALUES ('{$name}', '{$price}', '{$fileNameWithDir}')";
             mysqli_query(connectToSQL(), $sql_addProduct);
