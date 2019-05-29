@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'] == 'authentication') 
     $login = clearStr($_POST['login']);
     $password = md5($_POST['password'] . SALT); //получаем hash (в БД уже лежит именно хэш)
 
-    $sql_loginPassSearch = "SELECT login, password FROM users where login = " . "'$login'";
+    $sql_loginPassSearch = "SELECT id, password FROM users where login = " . "'$login'";
     $res_loginPassSearch = mysqli_query(connectToSQL(), $sql_loginPassSearch) or die(mysqli_error(connectToSQL()));
 
     $userData = mysqli_fetch_assoc($res_loginPassSearch);
