@@ -3,30 +3,12 @@ include('config.php');
 
 $title = 'Седьмой урок';
 
-    // switch($_GET['page']) { //контроллер выбора страниц
-    //     // case 'singlePic': include('pages/singlePic.php'); break;
-    //     // // case 'addPic': include('pages/addPic.php'); break;
-    //     // case 'usersAddShowDelete': include('pages/usersAddShowDelete.php'); break;
-    //     // case 'gallery': include('pages/gallery.php'); break;
-    //     // case 'calc1': include('pages/calc1.php'); break;
-    //     // case 'calc2': include('pages/calc2.php'); break;
-    //     // case 'catalogue': include('pages/catalogue.php'); break;
-    //     // case 'product': include('pages/product.php'); break;
-    //     // case 'feedback': include('/pages/feedback.php'); break;
-    //     // case 'addProduct': include('/pages/addProduct.php'); break;
-    //     // case 'authPage': include('/pages/authPage.php'); break;
-    //     case 'logOut': 
-    //     $_SESSION['isLogged'] = 'NO';
-    //     $_SESSION['isAdmin'] = 'NO';
-    //     header('Location:' . $_SERVER['HTTP_REFERER']);
-    //     break;
-    //     // default: echo $pageFile; break;
-    // };
     if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
         include("/pages/{$_GET['page']}.php");
     } else if ($_GET['page'] == 'logOut') {
         $_SESSION['isLogged'] = 'NO';
         $_SESSION['isAdmin'] = 'NO';
+        session_destroy();
         header('Location:' . $_SERVER['HTTP_REFERER']);
     };
     

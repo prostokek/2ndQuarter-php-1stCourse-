@@ -1,6 +1,5 @@
 <?php
 $title = 'Аутентификация';
-$authCount = 0;
 
 $returnTolocation = $_SERVER['HTTP_REFERER'];
 
@@ -8,31 +7,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'] == 'authentication') 
     $login = clearStr($_POST['login']);
     $password = md5($_POST['password'] . SALT); //получаем hash (в БД уже лежит именно хэш)
 
-    $sql_loginPassSearch = "SELECT login, password FROM users";
-
+    $sql_loginPassSearch = "SELECT login, password FROM users where login = " . "'$login'";
     $res_loginPassSearch = mysqli_query(connectToSQL(), $sql_loginPassSearch) or die(mysqli_error(connectToSQL()));
 
-    while ($userData = mysqli_fetch_assoc($res_loginPassSearch)) {
+    $userData = mysqli_fetch_assoc($res_loginPassSearch);
         if ($login == 'admin' && $password == $userData['password']) {
-            $authCount = 1;
             $_SESSION['isLogged'] = 'YES';
             $_SESSION['isAdmin'] = 'YES';
             // header('Location: ' . $returnTolocation);
-            break;
-        }
-        if ($login == $userData['login'] && $password == $userData['password']) {
-            $authCount = 1;
-            $_SESSION['isLogged'] = 'YES';
-            $_SESSION['isAdmin'] = 'NO';
-            header('Location: ' . $returnTolocation); // is needed?
-            // break;
-        };
-    };
-    if ($authCount === 0) {
-        $_SESSION['isLogged'] = 'NO';
-        $_SESSION['isAdmin'] = 'NO';
-        // echo 'Ошибка, неправильно указан/ы логин и/или пароль';
-    };
+        } else if ($password == $userData['password']) { //$login == $userData['login'] &&
+                $_SESSION['isLogged'] = 'YES';
+                $_SESSION['isAdmin'] = 'NO';
+                header('Location: ' . $returnTolocation); // is needed?
+            } else { // if ($authCount === 0)
+                $_SESSION['isLogged'] = 'NO';
+                $_SESSION['isAdmin'] = 'NO';
+                // echo 'Ошибка, неправильно указан/ы логин и/или пароль';
+                };
 };
 // echo $_SERVER['HTTP_REFERER'];
 // echo '<br>' . $returnTolocation . '<br>';
