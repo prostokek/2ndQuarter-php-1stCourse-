@@ -1,8 +1,8 @@
 <?php
 $title = 'Каталог';
-$sql_catalogueHTML = "SELECT id, name, price, picPath, info FROM products"; 
+$sql_catalogue = "SELECT id, name, price, picPath, info FROM products"; 
 
-$res_catalogue = mysqli_query(connectToSQL(), $sql_catalogueHTML) or die(mysqli_error(connectToSQL())); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
+$res_catalogue = mysqli_query(connectToSQL(), $sql_catalogue) or die(mysqli_error(connectToSQL())); //(адрес, запрос) || получили результат запроса || or die(что делать в случае, если нет ничего по адресу)
 
 $catalogue = '';
 while ($productData = mysqli_fetch_assoc($res_catalogue)) {
@@ -26,5 +26,5 @@ $content = <<<php
         {$catalogue}
     </div>
 php;
-include ('addToCart.php');
+include ('catalogue_addToCart.php');
 ?>

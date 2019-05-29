@@ -16,9 +16,8 @@ if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
     header('Location:' . $_SERVER['HTTP_REFERER']);
 };
 
-var_dump($_SESSION);
-echo '<br>';
-var_dump($_POST);
+varDump($_SESSION); echo ' -- SESSION <br>';
+varDump($_POST); echo ' -- POST <br>';
 
 // РАБОТА НАД HTML
 
@@ -33,6 +32,7 @@ $headerMenu = <<<php
         <li><a href="?page=feedback">Отзывы</a></li>
         <li><a href="?page=addProduct">Добавить продукт</a></li>
         <li><a href="?page=authPage">Авторизация</a></li>
+        <li><a href="?page=cart">Корзина</a></li>
     </ul>
 php;
 
