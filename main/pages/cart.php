@@ -20,19 +20,19 @@ while ($cartProductData = mysqli_fetch_assoc($res_cart)) {
     <a href="?page=product&id={$cartProductData['productCatalogueId']}">Подробнее</a>
     <form method='POST'>
         <input type='hidden' name = 'productId' value = {$cartProductData['productCatalogueId']}>
-        <input type='hidden' name = 'query[0]' value = 'addToCart'>
+        <input type='hidden' name = 'query[0]' value = 'appendProductCount'>
         <input type = 'submit' value = 'Добавить ещё 1'>
     </form>
 
     <form method='POST'>
         <input type='hidden' name = 'productId' value = {$cartProductData['productCatalogueId']}>
-        <input type='hidden' name = 'query[1]' value = 'diminishCart'>
-        <input type = 'submit' value = 'Удалить 1'> <!-- дописать скрипт -->
+        <input type='hidden' name = 'query[1]' value = 'diminishProductCount'>
+        <input type = 'submit' value = 'Удалить 1'>
     </form>
     <form method='POST'>
         <input type='hidden' name = 'productId' value = {$cartProductData['productCatalogueId']}>
         <input type='hidden' name = 'query[2]' value = 'clearOneProduct'>
-        <input type = 'submit' value = 'Удалить данную позицию'> <!-- дописать скрипт -->
+        <input type = 'submit' value = 'Удалить данную позицию'>
     </form>
     <hr>
 php;
@@ -44,7 +44,10 @@ $content = <<<php
         <h1>Каталог</h1>
         {$cart}
     </div>
-    <p> очистить корзину </p>
+    <form method='POST'>
+        <input type='hidden' name = 'query[3]' value = 'clearCart'>
+        <input type = 'submit' value = 'Очистить корзину'>
+    </form>
 php;
 include ('changeCountInCart.php');
 // include ('diminishCart.php');
