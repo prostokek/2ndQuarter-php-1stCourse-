@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $res_findProductInCatalogue = mysqli_query(connectToSQL(), $sql_findProductInCatalogue);
     $catalogueProductData = mysqli_fetch_assoc($res_findProductInCatalogue);
     
-    $sql_findProductInCart = "SELECT id, productCatalogueId, user_id, product_name, count
+    $sql_findProductInCart = "SELECT id, productCatalogueId, user_id, product_name, count, picPath
                               FROM cart"; //pic || count
     $res_findProductInCart = mysqli_query(connectToSQL(), $sql_findProductInCart);
     while ($cartProductData = mysqli_fetch_assoc($res_findProductInCart)) {
@@ -18,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         };
     };
     if ($productAlrdyAdded != 'YES') {
-        $sql_insertToCart = "INSERT into cart (productCatalogueId, user_id, product_name, price) 
-        VALUES ({$catalogueProductData['id']},  {$_SESSION['currentUserId']}, '{$catalogueProductData['name']}', {$catalogueProductData['price']})";
+        $sql_insertToCart = "INSERT into cart (productCatalogueId, user_id, product_name, price, picPath) 
+        VALUES ({$catalogueProductData['id']},  {$_SESSION['currentUserId']}, '{$catalogueProductData['name']}', {$catalogueProductData['price']}, '{$catalogueProductData['picPath']}')";
+        // echo $catalogueProductData['picPath'];
         mysqli_query(connectToSQL(), $sql_insertToCart);
         header('Location: /?page=catalogue');
     };

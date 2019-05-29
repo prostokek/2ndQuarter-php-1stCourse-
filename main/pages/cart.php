@@ -1,7 +1,7 @@
 <?php
 $title = 'Корзина';
 // $currentUserId = $_SESSION['currentUserId'];
-$sql_cart = "SELECT id, productCatalogueId, user_id, product_name, count, price
+$sql_cart = "SELECT id, productCatalogueId, user_id, product_name, count, price, picPath
              FROM cart"; //pic  || user_id = $currentUserId
 
 $res_cart = mysqli_query(connectToSQL(), $sql_cart) or die(mysqli_error(connectToSQL())); 
