@@ -1,22 +1,28 @@
 <?php
 include('config.php');
-
+if (empty($_SESSION['authMsg'])) {
+    $authMsg = 'Вы не авторизованы';
+} else {
+    $authMsg = $_SESSION['authMsg'];
+};
 $title = 'Седьмой урок';
 
-    if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
-        include("/pages/{$_GET['page']}.php");
-    } else if ($_GET['page'] == 'logOut') {
-        $_SESSION['isLogged'] = 'NO';
-        $_SESSION['isAdmin'] = 'NO';
-        session_destroy();
-        header('Location:' . $_SERVER['HTTP_REFERER']);
-    };
-    
-    var_dump($_SESSION);
+if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
+    include("/pages/{$_GET['page']}.php");
+} else if ($_GET['page'] == 'logOut') {
+    $_SESSION['isLogged'] = 'NO';
+    $_SESSION['isAdmin'] = 'NO';
+    session_destroy();
+    header('Location:' . $_SERVER['HTTP_REFERER']);
+};
 
-    // РАБОТА НАД HTML
+var_dump($_SESSION);
+echo '<br>';
+var_dump($_POST);
 
-    $headerMenu = <<<php
+// РАБОТА НАД HTML
+
+$headerMenu = <<<php
     <ul>
         <li><a href="/">Главная страница</a></li>
         <li><a href="?page=gallery">Галерея</a></li>
@@ -30,8 +36,8 @@ $title = 'Седьмой урок';
     </ul>
 php;
 
-    $date = date(Y);
-    $footer = <<<php
+$date = date(Y);
+$footer = <<<php
     <footer>
         Год: {$date}
     </footer>
@@ -39,6 +45,5 @@ php;
 
 
 $pageFile = file_get_contents('../main/pages/pageTemplate.php');
-$pageFile = str_replace(['{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$title, $headerMenu, $content, $footer], $pageFile);
+$pageFile = str_replace(['{AUTH_MSG}', '{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$authMsg, $title, $headerMenu, $content, $footer], $pageFile);
 echo $pageFile;
-?>

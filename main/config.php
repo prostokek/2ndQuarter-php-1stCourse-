@@ -18,11 +18,7 @@ if(sizeof(file (__DIR__ . '/Logs/log.txt')) > 499) { //количество ст
 };
     /* /СОЗДАНИЕ ЛОГОВ */
 
-
-session_start();
-
-const PUBLIC_DIR = __DIR__;
-const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //
+    // ФУНКЦИИ
 
 function connectToSQL() {
     static $link;
@@ -40,4 +36,11 @@ function connectToSQL() {
 function clearStr($str) {
     return mysqli_real_escape_string(connectToSQL(), strip_tags(trim($str)));
 };
+
+    // /ФУНКЦИИ
+
+session_start();
+
+const PUBLIC_DIR = __DIR__;
+const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //
 ?>

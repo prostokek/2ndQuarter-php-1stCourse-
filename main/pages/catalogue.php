@@ -12,6 +12,10 @@ while ($productData = mysqli_fetch_assoc($res_catalogue)) {
     <img src="{$productData['picPath']}" width=200px">
     <p>{$productData['info']}</p>
     <a href="?page=product&id={$productData['id']}">Подробнее</a>
+    <form method='POST'>
+        <input type='hidden' name = 'productId' value = {$productData['id']}>
+        <input type = 'submit' value = 'Добавить в корзину'>
+    </form>
     <hr>
 php;
 };
@@ -22,4 +26,5 @@ $content = <<<php
         {$catalogue}
     </div>
 php;
+include ('addToCart.php');
 ?>
