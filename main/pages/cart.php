@@ -10,13 +10,14 @@ $cart = '';
 while ($cartProductData = mysqli_fetch_assoc($res_cart)) {
     if ($cartProductData['user_id'] === $_SESSION['currentUserId']) {
     $cost = $cartProductData['count'] * $cartProductData['price'];
+    $summaryCost += $cost;
     $cart .= <<<php
     <h2>{$cartProductData['product_name']}</h2>
     <h3>Цена: \${$cartProductData['price']}</h3>
     <img src="{$cartProductData['picPath']}" width=200px">
     <p>{$cartProductData['info']}</p>
-    <p>{$cartProductData['count']}</p>
-    <p>$cost</p>
+    <p>Количество: {$cartProductData['count']}</p>
+    <p>Стоимость: $cost</p>
     <a href="?page=product&id={$cartProductData['productCatalogueId']}">Подробнее</a>
     <form method='POST'>
         <input type='hidden' name = 'productId' value = {$cartProductData['productCatalogueId']}>
@@ -43,6 +44,7 @@ $content = <<<php
     <div>
         <h1>Каталог</h1>
         {$cart}
+        Общая стоимость товаров в корзине: \$$summaryCost
     </div>
     <form method='POST'>
         <input type='hidden' name = 'query[3]' value = 'clearCart'>
