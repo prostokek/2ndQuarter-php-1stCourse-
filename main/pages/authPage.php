@@ -21,13 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'] == 'authentication')
             $_SESSION['isAdmin'] = 'YES';
         } else {
             $_SESSION['isAdmin'] = 'NO';
-        }
+        };
+        header('Location:/?page=personalArea');
     } else {
         $_SESSION['isLogged'] = 'NO';
         $_SESSION['isAdmin'] = 'NO';
         $_SESSION['authMsg'] = "Вы указали неверный логин и/или пароль";
+        header('Location: ' . $returnTolocation);
     };
-    header('Location: ' . $returnTolocation);
 };
 
 if ($_SESSION['isLogged'] != 'YES') {
