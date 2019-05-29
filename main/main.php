@@ -33,7 +33,8 @@ $headerMenu = <<<php
         <li><a href="?page=addProduct">Добавить продукт</a></li>
         <li><a href="?page=authPage">Авторизация</a></li>
         <li><a href="?page=cart">Корзина</a></li> 
-        <li><a href="?page=personalArea">Личный кабинет</a></li>
+        <li><a href="?page=personalArea">Личный кабинет</a></li> 
+        <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
     </ul>
 php;
 

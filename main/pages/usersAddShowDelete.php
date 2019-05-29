@@ -2,6 +2,8 @@
 $title = 'Пользователи';
 $count = 0;
 
+// НУЖНО БУДЕТ СДЕЛАТЬ ДОСТУП ТОЛЬКО АДМИНИСТРАЦИИ
+
 if(!empty($_POST['login']) && !empty($_POST['password']) && $_POST['query'] == 'addUser') { // && query = addUser
     $login = clearStr($_POST['login']);
     $password = md5($_POST['password'] . SALT); //получаем хэш (шифруем) для последующего сохранения его в БД
