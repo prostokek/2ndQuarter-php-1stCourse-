@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>{TITLE}</h1>
+    <p>{AUTH_MSG}</p>
 
     <aside style='float: left; width:20%'>
     {HEADER_MENU}

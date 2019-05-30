@@ -1,4 +1,5 @@
 <?php
+$title = 'Калькулятор 2';
 if (isset($_POST['a']) && isset($_POST['b']) && isset($_POST['operation'])) {
     $calc_result_addition = 'Результат сложения данных чисел: ' . ((int)$_POST['a'] + (int)$_POST['b']) . '<br>';
     $calc_result_substraction = 'Результат вычитания данных чисел: ' . ((int)$_POST['a'] - (int)$_POST['b']) . '<br>';
