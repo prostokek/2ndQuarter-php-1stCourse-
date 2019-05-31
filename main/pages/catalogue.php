@@ -55,7 +55,8 @@ function addToCart() {
             // header('Location:/?page=catalogue'); заменяем на проверку запроса страницы методом POST из-за ajax
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // echo 'sss';
-                $cartCount = countCart();
+                // $cartCount = countCart();
+                global $cartCount;
                 echo $cartCount;
                 exit;
             };

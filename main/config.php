@@ -44,7 +44,7 @@ function countCart() {
     return $cartCount['count(*)'];
 };
 
-
+$cartCount = countCart();
     // /ФУНКЦИИ
 
 const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //

@@ -57,7 +57,7 @@ $headerMenu = <<<php
         <li><a href="?page=feedback">Отзывы</a></li>
         <li><a href="?page=addProductToCatalogue">Добавить продукт</a></li>
         <li><a href="?page=authPage">Авторизация</a></li>
-        <li><a href="?page=cart">Корзина<i id='cartCount'></i></a></li> 
+        <li><a href="?page=cart">Корзина<i id='cartCount'>({$cartCount})</i></a></li> 
         <li><a href="?page=personalArea">Личный кабинет</a></li> 
         <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
     </ul>
