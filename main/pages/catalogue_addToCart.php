@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // echo $sql_appendProductInCartCount;
             mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
             header('Location:/?page=catalogue');
+            exit;
             // break;
         };
     };
@@ -30,5 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // echo $catalogueProductData['picPath'];
         mysqli_query(connectToSQL(), $sql_insertToCart);
         header('Location: /?page=catalogue');
+        exit;
     };
 };

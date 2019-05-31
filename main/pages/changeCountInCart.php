@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
                 // echo $sql_appendProductInCartCount;
                 mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
                 header('Location:/?page=cart');
+                exit;
                 break;
             };
         };
@@ -31,12 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
                     WHERE id = {$productInCartData['id']}";
                     mysqli_query(connectToSQL(), $sql_deleteFromCart);
                     header('Location:/?page=cart');
+                    exit;
                 } else {
                     $sql_appendProductInCartCount = "UPDATE cart 
                     SET count = $decreasedProductCount where id = {$productInCartData['id']}";
                     // echo $sql_appendProductInCartCount;
                     mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
                     header('Location:/?page=cart');
+                    exit;
                     break;
                 };
             };
@@ -52,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
                     WHERE id = {$productInCartData['id']}";
                     mysqli_query(connectToSQL(), $sql_deleteFromCart);
                     header('Location:/?page=cart');
+                    exit;
             };
         };
     };
@@ -62,4 +66,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'][3] == 'clearCart') {
     // echo $sql_deleteUsersCart;
     mysqli_query(connectToSQL(), $sql_deleteUsersCart);
     header('Location:/?page=cart');
+    exit;
 };
