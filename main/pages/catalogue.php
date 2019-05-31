@@ -8,13 +8,12 @@ function html() {
     $catalogue = '';
     while ($productData = mysqli_fetch_assoc($res_catalogue)) {
         $catalogue .= <<<php
-        <script src="./js/script.js"></script>
         <h2>{$productData['name']}</h2>
         <h3>Цена: \${$productData['price']}</h3>
         <img src="{$productData['picPath']}" width=200px">
         <p>{$productData['info']}</p>
         <a href="?page=product&id={$productData['id']}">Подробнее</a>
-        <a href="?page=catalogue&productId={$productData['id']}&func=addToCart">Добавить в корзину</a>
+        <a onclick='addToCart({$productData['id']})' style='cursor: pointer'>Добавить в корзину</a>
         <hr>
 php;
     };
@@ -24,6 +23,7 @@ php;
             <h1>Каталог</h1>
             {$catalogue}
         </div>
+        <script src="./js/catalogue_AddingToCart.js"></script>
 php;
 
 $html = [
@@ -52,8 +52,13 @@ function addToCart() {
             $sql_appendProductInCartCount = "UPDATE cart 
                 SET count = $increasedProductCount where id = {$cartProductData['id']}";
             mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
-            header('Location:/?page=catalogue');
-            exit;
+            // header('Location:/?page=catalogue'); заменяем на проверку запроса страницы методом POST из-за ajax
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // echo 'sss';
+                $cartCount = countCart();
+                echo $cartCount;
+                exit;
+            };
             // break;
         };
     };

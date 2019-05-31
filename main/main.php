@@ -39,6 +39,15 @@ $html = $func();
 
 
 // РАБОТА НАД HTML
+// $sql_countCart = "select count(*) from cart where user_id = {$_SESSION['currentUserId']}";
+// $res_countCart = mysqli_query(connectToSQL(), $sql_countCart);
+// $cartCount = mysqli_fetch_assoc($res_countCart);
+// $cartCount = 
+// var_dump($cartCount['count(*)']);
+
+
+
+
 
 $headerMenu = <<<php
     <ul>
@@ -48,7 +57,7 @@ $headerMenu = <<<php
         <li><a href="?page=feedback">Отзывы</a></li>
         <li><a href="?page=addProductToCatalogue">Добавить продукт</a></li>
         <li><a href="?page=authPage">Авторизация</a></li>
-        <li><a href="?page=cart">Корзина</a></li> 
+        <li><a href="?page=cart">Корзина<i id='cartCount'></i></a></li> 
         <li><a href="?page=personalArea">Личный кабинет</a></li> 
         <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
     </ul>
@@ -61,11 +70,13 @@ $footer = <<<php
     </footer>
 php;
 
+// $cartCount = countCart();
 
 $pageFile = file_get_contents('../main/pages/pageTemplate.php');
+// $headerMenu = str_replace('{CART_COUNT}', "({$cartCount['count(*)']})", $headerMenu);
 $pageFile = str_replace(['{AUTH_MSG}', '{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$authMsg, $html['title'], $headerMenu, $html['content'], $footer], $pageFile);
 echo $pageFile;
-var_dump($func);
+// var_dump($func);
 
 
 // session_destroy();
