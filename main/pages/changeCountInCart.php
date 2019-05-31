@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
             };
         };
     } else if ($_POST['query'][1] == 'diminishProductCount') {
-        $sql_productInCart = "SELECT id, productCatalogueId, user_id, product_name, count, price,
+        $sql_productInCart = "SELECT id, productCatalogueId, user_id, product_name, count, price
         FROM cart"; // where id = $productId
         $res_productInCart = mysqli_query(connectToSQL(), $sql_productInCart);
     

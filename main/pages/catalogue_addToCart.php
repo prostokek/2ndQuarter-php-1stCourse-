@@ -14,21 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Товар уже есть в корзине данного пользователя
             // break;
             $productAlrdyAdded = 'YES';
-            echo 'Товар уже есть в корзине данного пользователя';
-
-            ////
-
-                
-                    $increasedProductCount = $cartProductData['count'] + 1;
-                    $sql_appendProductInCartCount = "UPDATE cart 
-                        SET count = $increasedProductCount where id = {$cartProductData['id']}";
-                    echo $sql_appendProductInCartCount;
-                    mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
-                    // header('Location:/?page=catalogue');
-                    // break;
-
-
-            //////
+            // echo 'Товар уже есть в корзине данного пользователя';
+            $increasedProductCount = $cartProductData['count'] + 1;
+            $sql_appendProductInCartCount = "UPDATE cart 
+                SET count = $increasedProductCount where id = {$cartProductData['id']}";
+            // echo $sql_appendProductInCartCount;
+            mysqli_query(connectToSQL(), $sql_appendProductInCartCount);
+            header('Location:/?page=catalogue');
+            // break;
         };
     };
     if ($productAlrdyAdded != 'YES') {
