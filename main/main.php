@@ -16,8 +16,8 @@ if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
     header('Location:' . $_SERVER['HTTP_REFERER']);
 };
 
-varDump($_SESSION); echo ' -- SESSION <br>';
-varDump($_POST); echo ' -- POST <br>';
+// varDump($_SESSION); echo ' -- SESSION <br>';
+// varDump($_POST); echo ' -- POST <br>';
 
 // РАБОТА НАД HTML
 

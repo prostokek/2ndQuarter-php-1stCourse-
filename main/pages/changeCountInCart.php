@@ -1,7 +1,8 @@
 <?php
 $productId = $_POST['productId'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
+function changeCountInCart() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($productId)) {
     if ($_POST['query'][0] == 'appendProductCount') {
         $sql_productInCart = "SELECT id, productCatalogueId, user_id, product_name, count, price 
         FROM cart"; // where id = $productId
@@ -67,4 +68,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'][3] == 'clearCart') {
     mysqli_query(connectToSQL(), $sql_deleteUsersCart);
     header('Location:/?page=cart');
     exit;
+};
 };

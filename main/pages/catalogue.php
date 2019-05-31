@@ -7,6 +7,7 @@ $res_catalogue = mysqli_query(connectToSQL(), $sql_catalogue) or die(mysqli_erro
 $catalogue = '';
 while ($productData = mysqli_fetch_assoc($res_catalogue)) {
     $catalogue .= <<<php
+    <script src="./js/script.js"></script>
     <h2>{$productData['name']}</h2>
     <h3>Цена: \${$productData['price']}</h3>
     <img src="{$productData['picPath']}" width=200px">
