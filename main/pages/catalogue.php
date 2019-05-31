@@ -15,10 +15,6 @@ function html() {
         <p>{$productData['info']}</p>
         <a href="?page=product&id={$productData['id']}">Подробнее</a>
         <a href="?page=catalogue&productId={$productData['id']}&func=addToCart">Добавить в корзину</a>
-        <form method='POST'>
-            <input type='hidden' name = 'productId' value = {$productData['id']}>
-            <input type = 'submit' value = 'Добавить в корзину'>
-        </form>
         <hr>
 php;
     };
