@@ -3,6 +3,7 @@ function addToCart(id) {
         type: "POST",
         url: "?page=catalogue&func=addToCart&productId=" + id,
         success: function (data) { //callback func
+            console.log(data);
             $("#cartCount").html("(" + data + ")");
             // console.log(data);
         }

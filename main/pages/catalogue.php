@@ -68,7 +68,14 @@ function addToCart() {
         VALUES ({$catalogueProductData['id']},  {$_SESSION['currentUserId']}, '{$catalogueProductData['name']}', {$catalogueProductData['price']}, '{$catalogueProductData['picPath']}')";
 
         mysqli_query(connectToSQL(), $sql_insertToCart);
-        header('Location: /?page=catalogue');
-        exit;
+        // header('Location: /?page=catalogue');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // echo 'sss';
+            // $cartCount = countCart();
+            global $cartCount;
+            echo $cartCount;
+            exit;
+        };
+        // exit;
     };
 };
