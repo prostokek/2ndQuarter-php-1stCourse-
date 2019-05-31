@@ -46,7 +46,7 @@ $headerMenu = <<<php
         <li><a href="?page=usersAddShowDelete">Пользователи</a></li>
         <li><a href="?page=catalogue">Каталог</a></li>
         <li><a href="?page=feedback">Отзывы</a></li>
-        <li><a href="?page=addProduct">Добавить продукт</a></li>
+        <li><a href="?page=addProductToCatalogue">Добавить продукт</a></li>
         <li><a href="?page=authPage">Авторизация</a></li>
         <li><a href="?page=cart">Корзина</a></li> 
         <li><a href="?page=personalArea">Личный кабинет</a></li> 
@@ -67,6 +67,12 @@ $pageFile = str_replace(['{AUTH_MSG}', '{TITLE}', '{HEADER_MENU}', '{CONTENT}', 
 echo $pageFile;
 var_dump($func);
 
+
+// session_destroy();
+// $_SESSION['isLogged'] = 'YES';
+// $_SESSION['authMsg'] = "Вы авторизованы как Administrator";
+// $_SESSION['currentUserId'] = 82;
+// $_SESSION['isAdmin'] = 'YES';
 
 // varDump($_SESSION); echo ' -- SESSION <br>';
 // varDump($_POST); echo ' -- POST <br>';
