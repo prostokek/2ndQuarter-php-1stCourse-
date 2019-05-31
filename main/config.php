@@ -39,8 +39,5 @@ function clearStr($str) {
 
     // /ФУНКЦИИ
 
-session_start();
-
-const PUBLIC_DIR = __DIR__;
 const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //
 ?>
