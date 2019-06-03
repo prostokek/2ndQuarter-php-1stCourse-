@@ -53,10 +53,11 @@ function addProductToCatalogue() {
                 // НА СЕРВЕРЕ НУЖНО БУДЕТ ЗАМЕНЯТЬ ДРУГУЮ СТРОКУ (путь же будет другим)
                 $sql_addProductToCatalogue = "INSERT INTO products(name, price, picPath)
                 VALUES ('{$name}', '{$price}', '{$fileNameWithDir}')";
-                mysqli_query(connectToSQL(), $sql_addProductToCatalogue);
+                echo $sql_addProductToCatalogue;
+                // mysqli_query(connectToSQL(), $sql_addProductToCatalogue);
             };
         };
-        header('Location: /?page=addProductToCatalogue');
-        exit; //?
+        // header('Location: /?page=addProductToCatalogue');
+        // exit; //?
     };
 };
