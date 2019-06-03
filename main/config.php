@@ -37,14 +37,7 @@ function clearStr($str) {
     return mysqli_real_escape_string(connectToSQL(), strip_tags(trim($str)));
 };
 
-function countCart() {
-    $sql_countCart = "select count(*) from cart where user_id = {$_SESSION['currentUserId']}";
-    $res_countCart = mysqli_query(connectToSQL(), $sql_countCart);
-    $cartCount = mysqli_fetch_assoc($res_countCart);
-    return $cartCount['count(*)'];
-};
 
-$cartCount = countCart();
     // /ФУНКЦИИ
 
 const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //

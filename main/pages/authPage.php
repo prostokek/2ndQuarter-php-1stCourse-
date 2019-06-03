@@ -1,5 +1,29 @@
 <?php
-$title = 'Аутентификация';
+function html() {
+    $title = 'Аутентификация';
+
+    if ($_SESSION['isLogged'] != 'YES') {
+        $content = <<<php
+        <form method = 'POST'>
+            <input type="text" name = 'login' placeholder = 'Введите логин'>
+            <input type="password" name = 'password' placeholder = 'Введите пароль'>
+            <input type="hidden" name = 'query' value = 'authentication'>
+            <input type="submit" value = 'Авторизоваться'>
+        </form>
+php;
+    } else {
+        $content = <<<php
+        <a href='?page=logOut'>Выход (из учётной записи)</a>
+php;
+    };
+    $html = [
+        'content' => $content,
+        'title' => $title
+    ];
+    
+    return $html;
+}
+
 
 $returnTolocation = $_SERVER['HTTP_REFERER'];
 
@@ -31,17 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'] == 'authentication')
     };
 };
 
-if ($_SESSION['isLogged'] != 'YES') {
-    $content = <<<php
-    <form method = 'POST'>
-        <input type="text" name = 'login' placeholder = 'Введите логин'>
-        <input type="password" name = 'password' placeholder = 'Введите пароль'>
-        <input type="hidden" name = 'query' value = 'authentication'>
-        <input type="submit" value = 'Авторизоваться'>
-    </form>
-php;
-} else {
-    $content = <<<php
-    <a href='?page=logOut'>Выход (из учётной записи)</a>
-php;
-};
+// if ($_SESSION['isLogged'] != 'YES') {
+//     $content = <<<php
+//     <form method = 'POST'>
+//         <input type="text" name = 'login' placeholder = 'Введите логин'>
+//         <input type="password" name = 'password' placeholder = 'Введите пароль'>
+//         <input type="hidden" name = 'query' value = 'authentication'>
+//         <input type="submit" value = 'Авторизоваться'>
+//     </form>
+// php;
+// } else {
+//     $content = <<<php
+//     <a href='?page=logOut'>Выход (из учётной записи)</a>
+// php;
+// };

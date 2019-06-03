@@ -12,6 +12,19 @@ $title = 'Седьмой урок';
 // $page = ! empty($_GET['page']) ? $_GET['page'] : 'index';
 // $func = ! empty($_GET['func']) ? $_GET['func'] : 'index';
 
+
+function countCart() {
+    $sql_countCart = "select count(*) from cart where user_id = {$_SESSION['currentUserId']}";
+    $res_countCart = mysqli_query(connectToSQL(), $sql_countCart);
+    $cartCount = mysqli_fetch_assoc($res_countCart);
+    return $cartCount['count(*)'];
+};
+if (!empty($_SESSION)) {
+    $cartCount = countCart();
+};
+
+
+
 if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
     include("/pages/{$_GET['page']}.php");
 } else if ($_GET['page'] == 'logOut') {
@@ -20,6 +33,8 @@ if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
     session_destroy();
     header('Location:' . $_SERVER['HTTP_REFERER']);
 };
+
+
 
 $func = !empty($_GET['func']) ? $_GET['func'] : 'html';
 
@@ -30,20 +45,9 @@ if (! function_exists($func)) { // вместо моего query
 $html = $func();
 
 
-// $html = [
-//     'content' => $content,
-//     'title' => $title
-// ];
-// // varDump($html);
-// return $html;
 
 
 // РАБОТА НАД HTML
-// $sql_countCart = "select count(*) from cart where user_id = {$_SESSION['currentUserId']}";
-// $res_countCart = mysqli_query(connectToSQL(), $sql_countCart);
-// $cartCount = mysqli_fetch_assoc($res_countCart);
-// $cartCount = 
-// var_dump($cartCount['count(*)']);
 
 
 
