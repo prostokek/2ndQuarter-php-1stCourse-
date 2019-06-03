@@ -26,7 +26,7 @@ function connectToSQL() {
         $link = mysqli_connect(  //подключаемся к базе данных
             '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
             'root', //имя пользователя
-            '', // пароль
+            'pass', // пароль
             '2ndquarter-php-1stcourse-' //название базы данных
         );
     };
