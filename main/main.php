@@ -49,11 +49,8 @@ $html = $func();
 
 // РАБОТА НАД HTML
 
-
-
-
-
-$headerMenu = <<<php
+if($_SESSION['isAdmin'] == 'YES') {
+    $headerMenu = <<<php
     <ul>
         <li><a href="/">Главная страница</a></li>
         <li><a href="?page=usersAddShowDelete">Пользователи</a></li>
@@ -66,6 +63,23 @@ $headerMenu = <<<php
         <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
     </ul>
 php;
+} else {
+    $headerMenu = <<<php
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="?page=catalogue">Каталог</a></li>
+        <li><a href="?page=feedback">Отзывы</a></li>
+        <li><a href="?page=authPage">Авторизация</a></li>
+        <li><a href="?page=cart">Корзина<i id='cartCount'>({$cartCount})</i></a></li> 
+        <li><a href="?page=personalArea">Личный кабинет</a></li> 
+        <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
+    </ul>
+php;
+}
+
+
+
+
 
 $date = date(Y);
 $footer = <<<php
@@ -78,7 +92,8 @@ php;
 
 $pageFile = file_get_contents('../main/pages/pageTemplate.php');
 // $headerMenu = str_replace('{CART_COUNT}', "({$cartCount['count(*)']})", $headerMenu);
-$pageFile = str_replace(['{AUTH_MSG}', '{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], [$authMsg, $html['title'], $headerMenu, $html['content'], $footer], $pageFile);
+$pageFile = str_replace(['{AUTH_MSG}', '{DEBUGMSG}', '{TITLE}', '{HEADER_MENU}', '{CONTENT}', '{FOOTER}'], 
+                        [$authMsg, $_SESSION['msg'], $html['title'], $headerMenu, $html['content'], $footer], $pageFile);
 echo $pageFile;
 // var_dump($func);
 

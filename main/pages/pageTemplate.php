@@ -11,6 +11,7 @@
 <body>
     <h1>{TITLE}</h1>
     <p>{AUTH_MSG}</p>
+    <p>{DEBUGMSG}</p>
 
     <aside style='float: left; width:20%'>
     {HEADER_MENU}

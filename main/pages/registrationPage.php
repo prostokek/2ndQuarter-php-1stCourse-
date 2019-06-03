@@ -31,20 +31,24 @@ function addUser() {
         if (!empty($fio)) {
             $sql_addUser = "INSERT INTO users(login, password, fio)
             VALUES ('{$login}', '{$password}', '{$fio}')";
-            echo $sql_addUser;
         } else {
             $sql_addUser = "INSERT INTO users(login, password)
             VALUES ('{$login}', '{$password}')";
-            echo $sql_addUser;
         };
         
         while ($userData = mysqli_fetch_assoc($res_loginSearch)) {
             if ($login == $userData['login']) { //если логин уже занят
                 $count = 1;
+                // exit; // ?
             };
         };
         if ($count != 1) {
-            // mysqli_query(connectToSQL(), $sql_addUser);
+            mysqli_query(connectToSQL(), $sql_addUser);
+            $_SESSION['msg'] = 'Пользователь добавлен';
+            header('Location:/?page=usersAddShowDelete');
+        } else {
+            $_SESSION['msg'] = 'Логин уже занят';
+            header('Location:/?page=usersAddShowDelete');
         };
     };
 };

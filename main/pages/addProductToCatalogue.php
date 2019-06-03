@@ -1,26 +1,31 @@
 <?php
 function html() {
-    $title = 'Добавить продукт';
-    $content = <<<php
-        <form enctype="multipart/form-data" action='?page=addProductToCatalogue&func=addProductToCatalogue' method='POST'> 
-            <input type = 'text' name = 'name' placeholder = 'Название товара'>
-            <input type = 'text' name = 'price' placeholder = 'Цена'>
-            <input type = 'hidden' name = 'query' value = 'addProductToCatalogue'>
-            <br>
-            <input id = "userFile" name = "userFile" type = "file" style="display:none" required>
-            <label for = "userFile">Выберите фото товара (кликабельная надпись)</label>
-            <br>
-            <input type = 'submit' value = 'Добавить продукт'>
-        </form>
-    </article>
+    if($_SESSION['isAdmin'] == 'YES') {
+        $title = 'Добавить продукт';
+        $content = <<<php
+            <form enctype="multipart/form-data" action='?page=addProductToCatalogue&func=addProductToCatalogue' method='POST'> 
+                <input type = 'text' name = 'name' placeholder = 'Название товара'>
+                <input type = 'text' name = 'price' placeholder = 'Цена'>
+                <input type = 'hidden' name = 'query' value = 'addProductToCatalogue'>
+                <br>
+                <input id = "userFile" name = "userFile" type = "file" style="display:none" required>
+                <label for = "userFile">Выберите фото товара (кликабельная надпись)</label>
+                <br>
+                <input type = 'submit' value = 'Добавить продукт'>
+            </form>
+        </article>
 php;
 
-    $html = [
-        'content' => $content,
-        'title' => $title
-    ];
-    // varDump($html);
-    return $html;
+        $html = [
+            'content' => $content,
+            'title' => $title
+        ];
+        // varDump($html);
+        return $html;
+    } else {
+        header('Location: /' . $_SERVER['HTTP_REFERER']);
+        exit;
+    };
 };
 
 function addProductToCatalogue() {
