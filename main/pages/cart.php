@@ -1,6 +1,12 @@
 <?php
 function html() {
     $title = 'Корзина';
+    $orderForm = <<<php
+    <form method='POST' action='?page=orders&func=addOrder'>
+    <textarea name='commentary' placeholder='Комментарий к заказу'></textarea>
+    <input type='submit' value='Заказать'>
+    </form>
+php;
     
     $summaryCost = 0;
     // $currentUserId = $_SESSION['currentUserId'];
@@ -36,6 +42,7 @@ php;
 
         $content = <<<php
         <div>
+            <div>{$orderForm}</div>
             <h1>Корзина</h1>
             {$cart}
             Общая стоимость товаров в корзине: \$$summaryCost
