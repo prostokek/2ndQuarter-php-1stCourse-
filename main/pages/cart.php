@@ -1,62 +1,67 @@
 <?php
 function html() {
-    $title = 'Корзина';
-    $orderForm = <<<php
-    <form method='POST' action='?page=orders&func=addOrder'>
-    <textarea name='commentary' placeholder='Комментарий к заказу'></textarea>
-    <input type='submit' value='Заказать'>
-    </form>
+    if($_SESSION['isLogged'] == 'YES') {
+        $title = 'Корзина';
+        $orderForm = <<<php
+        <form method='POST' action='?page=orders&func=addOrder'>
+        <textarea name='commentary' placeholder='Комментарий к заказу'></textarea>
+        <input type='submit' value='Заказать'>
+        </form>
+php;
+        
+        $summaryCost = 0;
+        // $currentUserId = $_SESSION['currentUserId'];
+        $sql_cart = "SELECT id, productCatalogueId, user_id, product_name, count, price, picPath
+                    FROM cart"; //pic  || user_id = $currentUserId
+    
+        $res_cart = mysqli_query(connectToSQL(), $sql_cart) or die(mysqli_error(connectToSQL())); 
+    
+        $cart = '';
+        while ($cartProductData = mysqli_fetch_assoc($res_cart)) {
+            if ($cartProductData['user_id'] == $_SESSION['currentUserId']) {
+            $cost = $cartProductData['count'] * $cartProductData['price'];
+            $summaryCost += $cost;
+            $cart .= <<<php
+            <h2>{$cartProductData['product_name']}</h2>
+            <h3>Цена: \${$cartProductData['price']}</h3>
+            <img src="{$cartProductData['picPath']}" width=200px">
+            <p>{$cartProductData['info']}</p>
+            <p>Количество: {$cartProductData['count']}</p>
+            <p>Стоимость: $cost</p>
+            <a href="?page=product&id={$cartProductData['productCatalogueId']}">Подробнее</a>
+    
+            <!-- <i onclick="appendProductCount({$cartProductData['productCatalogueId']})" style='cursor: pointer'>Добавить ещё 1</i> -->
+    
+            <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=appendProductCount">Добавить ещё 1</a> 
+            <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=diminishProductCount">Удалить 1</a> 
+            <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=clearOneProduct">Удалить данную позицию</a>
+    
+            <hr>
+php;
+            } else continue;
+        };
+    
+            $content = <<<php
+            <div>
+                <div>{$orderForm}</div>
+                <h1>Корзина</h1>
+                {$cart}
+                Общая стоимость товаров в корзине: \$$summaryCost
+            </div>
+            <a href="?page=cart&func=clearCart">Очистить корзину</a>
+            <script src="./js/cart.js"></script>
 php;
     
-    $summaryCost = 0;
-    // $currentUserId = $_SESSION['currentUserId'];
-    $sql_cart = "SELECT id, productCatalogueId, user_id, product_name, count, price, picPath
-                FROM cart"; //pic  || user_id = $currentUserId
-
-    $res_cart = mysqli_query(connectToSQL(), $sql_cart) or die(mysqli_error(connectToSQL())); 
-
-    $cart = '';
-    while ($cartProductData = mysqli_fetch_assoc($res_cart)) {
-        if ($cartProductData['user_id'] == $_SESSION['currentUserId']) {
-        $cost = $cartProductData['count'] * $cartProductData['price'];
-        $summaryCost += $cost;
-        $cart .= <<<php
-        <h2>{$cartProductData['product_name']}</h2>
-        <h3>Цена: \${$cartProductData['price']}</h3>
-        <img src="{$cartProductData['picPath']}" width=200px">
-        <p>{$cartProductData['info']}</p>
-        <p>Количество: {$cartProductData['count']}</p>
-        <p>Стоимость: $cost</p>
-        <a href="?page=product&id={$cartProductData['productCatalogueId']}">Подробнее</a>
-
-        <!-- <i onclick="appendProductCount({$cartProductData['productCatalogueId']})" style='cursor: pointer'>Добавить ещё 1</i> -->
-
-        <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=appendProductCount">Добавить ещё 1</a> 
-        <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=diminishProductCount">Удалить 1</a> 
-        <a href="?page=cart&productId={$cartProductData['productCatalogueId']}&func=clearOneProduct">Удалить данную позицию</a>
-
-        <hr>
-php;
-        } else continue;
+        $html = [
+            'content' => $content,
+            'title' => $title
+        ];
+        // varDump($html);
+        return $html;
+    } else {
+        $_SESSION['msg'] = 'Вы не зарегистрированы/залогинены';
+        header('Location:/?page=authPage');
     };
-
-        $content = <<<php
-        <div>
-            <div>{$orderForm}</div>
-            <h1>Корзина</h1>
-            {$cart}
-            Общая стоимость товаров в корзине: \$$summaryCost
-        </div>
-        <a href="?page=cart&func=clearCart">Очистить корзину</a>
-        <script src="./js/cart.js"></script>
-php;
-
-    $html = [
-        'content' => $content,
-        'title' => $title
-    ];
-    // varDump($html);
-    return $html;
 };
 
 

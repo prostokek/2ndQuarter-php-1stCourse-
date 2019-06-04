@@ -10,6 +10,7 @@ function html() {
             <input type="hidden" name = 'query' value = 'authentication'>
             <input type="submit" value = 'Авторизоваться'>
         </form>
+        <p>Если Вы ещё не зарегистрированы, можете <a href=/?page=registrationPage>кликнуть здесь</a></p>
 php;
     } else {
         $content = <<<php

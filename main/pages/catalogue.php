@@ -45,7 +45,7 @@ function addToCart() {
     $catalogueProductData = mysqli_fetch_assoc($res_findProductInCatalogue);
     
     $sql_findProductInCart = "SELECT id, productCatalogueId, user_id, product_name, count, picPath
-                              FROM cart"; //pic || count
+                              FROM cart";
     $res_findProductInCart = mysqli_query(connectToSQL(), $sql_findProductInCart);
     while ($cartProductData = mysqli_fetch_assoc($res_findProductInCart)) {
         if ($cartProductData['productCatalogueId'] == $catalogueProductData['id'] && $cartProductData['user_id'] == $_SESSION['currentUserId']) {
@@ -68,11 +68,9 @@ function addToCart() {
     if ($productAlrdyAdded != 'YES') {
         $sql_insertToCart = "INSERT into cart (productCatalogueId, user_id, product_name, price, picPath) 
         VALUES ({$catalogueProductData['id']},  {$_SESSION['currentUserId']}, '{$catalogueProductData['name']}', {$catalogueProductData['price']}, '{$catalogueProductData['picPath']}')";
-        // echo $sql_insertToCart;
         mysqli_query(connectToSQL(), $sql_insertToCart);
         // header('Location: /?page=catalogue');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // echo 'sss';
             // $cartCount = countCart();
             global $cartCount;
             echo $cartCount;

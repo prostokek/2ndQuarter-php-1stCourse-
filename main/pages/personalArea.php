@@ -1,12 +1,12 @@
 <?php
 function html() {
     $title = 'Личный кабинет';
-    $sql_userData = "SELECT fio, login FROM users where id = {$_SESSION['currentUserId']}";
-    $res_userData = mysqli_query(connectToSQL(), $sql_userData);
-    $userData = mysqli_fetch_assoc($res_userData);
-    // varDump($userData);
 
     if ($_SESSION['isLogged'] == 'YES') {
+        $sql_userData = "SELECT fio, login FROM users where id = {$_SESSION['currentUserId']}";
+        $res_userData = mysqli_query(connectToSQL(), $sql_userData);
+        $userData = mysqli_fetch_assoc($res_userData);
+        // varDump($userData);
         $sql_orders = "SELECT id, user_id, order_items, commentary, date 
                        FROM orders 
                        WHERE user_id = " . $_SESSION['currentUserId'] .

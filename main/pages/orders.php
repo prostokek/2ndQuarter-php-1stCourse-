@@ -1,6 +1,4 @@
 <?php
-
-// проверку на админа (если админ -- можно видеть все заказы, если нет -- только свои) ?
 function html() {
     if ($_SESSION['isAdmin'] == 'YES') {
         $title = 'История заказов';
@@ -16,6 +14,8 @@ function html() {
             $content .= <<<php
             <h2>Номер заказа -- {$orderData['id']}</h2>
             <h3>Дата создания заказа: {$orderDate}</h3>
+            <h3>Комментарий к заказу</h3>
+            <p>{$orderData['commentary']}</p>
             <div>
                 <h3>Изменить статус заказа</h3>
                 <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderPaid&orderId={$orderData['id']}>Заказ оплачен</a>
@@ -53,7 +53,7 @@ function addOrder() {
     $_SESSION['msg'] = 'Что-то пошло не так';
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_cart = "SELECT user_id, product_name, count, price
-        FROM cart"; // picPath и id вряд ли нужны здесь
+        FROM cart";
         $order_items = array();
         $res_cart = mysqli_query(connectToSQL(), $sql_cart) or die(mysqli_error(connectToSQL()));
         while ($cartProductData = mysqli_fetch_assoc($res_cart)) {
@@ -86,14 +86,6 @@ function clearCart() {
     header('Location:?page=cart');
     exit;
 };
-
-// function orderSent() {
-//     $orderId = $_GET['orderId'];
-    // $sql_updateOrderStatus = "UPDATE orders 
-    //                           SET orderStatus = orderSent 
-    //                           WHERE ";
-// }
-
 
 function changeOrderStatus() {
     $orderStatus = $_GET['updatedOrderStatus'];
