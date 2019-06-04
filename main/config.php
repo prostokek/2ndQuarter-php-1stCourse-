@@ -8,7 +8,7 @@ function varDump($var) { //человеческий вывод var_dump() (не 
     }; 
 
     /* СОЗДАНИЕ ЛОГОВ */
-$date = date(r);
+$date = date('r');
 $log_count = (count(scandir(__DIR__ . '/Logs')) - 2);
 file_put_contents(__DIR__ . '/Logs/log.txt', "$date" . PHP_EOL, FILE_APPEND);
 
@@ -26,7 +26,7 @@ function connectToSQL() {
         $link = mysqli_connect(  //подключаемся к базе данных
             '127.0.0.1:3306', //'2ndQuarter-php-1stCourse-',
             'root', //имя пользователя
-            '', // пароль
+            'pass', // пароль
             '2ndquarter-php-1stcourse-' //название базы данных
         );
     };
@@ -37,10 +37,8 @@ function clearStr($str) {
     return mysqli_real_escape_string(connectToSQL(), strip_tags(trim($str)));
 };
 
+
     // /ФУНКЦИИ
 
-session_start();
-
-const PUBLIC_DIR = __DIR__;
 const SALT = 'randomSalt'; // сейчас всё равно значения сложность не имеет //
 ?>

@@ -1,5 +1,30 @@
 <?php
-$title = 'Аутентификация';
+function html() {
+    $title = 'Аутентификация';
+
+    if ($_SESSION['isLogged'] != 'YES') {
+        $content = <<<php
+        <form method = 'POST'>
+            <input type="text" name = 'login' placeholder = 'Введите логин'>
+            <input type="password" name = 'password' placeholder = 'Введите пароль'>
+            <input type="hidden" name = 'query' value = 'authentication'>
+            <input type="submit" value = 'Авторизоваться'>
+        </form>
+        <p>Если Вы ещё не зарегистрированы, можете <a href=/?page=registrationPage>кликнуть здесь</a></p>
+php;
+    } else {
+        $content = <<<php
+        <a href='?page=logOut'>Выход (из учётной записи)</a>
+php;
+    };
+    $html = [
+        'content' => $content,
+        'title' => $title
+    ];
+    
+    return $html;
+}
+
 
 $returnTolocation = $_SERVER['HTTP_REFERER'];
 
@@ -29,19 +54,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['query'] == 'authentication')
         $_SESSION['authMsg'] = "Вы указали неверный логин и/или пароль";
         header('Location: ' . $returnTolocation);
     };
-};
-
-if ($_SESSION['isLogged'] != 'YES') {
-    $content = <<<php
-    <form method = 'POST'>
-        <input type="text" name = 'login' placeholder = 'Введите логин'>
-        <input type="password" name = 'password' placeholder = 'Введите пароль'>
-        <input type="hidden" name = 'query' value = 'authentication'>
-        <input type="submit" value = 'Авторизоваться'>
-    </form>
-php;
-} else {
-    $content = <<<php
-    <a href='?page=logOut'>Выход (из учётной записи)</a>
-php;
 };
