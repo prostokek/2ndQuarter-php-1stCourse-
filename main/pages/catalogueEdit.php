@@ -80,21 +80,25 @@ function addProductToCatalogue() {
 };
 
 function archiveProduct() {
-    $productId = $_GET['productId'];
-    $sql_archiveProduct = "UPDATE products 
-                           SET isArchived = 'YES' 
-                           WHERE id = $productId";
-    mysqli_query(connectToSQL(), $sql_archiveProduct);
-    $_SESSION['msg'] = "Продукт с id = $productId заархивирован";
-    header('Location:/?page=catalogueEdit');
+    if ($_SESSION['isAdmin'] == 'YES') {
+        $productId = $_GET['productId'];
+        $sql_archiveProduct = "UPDATE products 
+                            SET isArchived = 'YES' 
+                            WHERE id = $productId";
+        mysqli_query(connectToSQL(), $sql_archiveProduct);
+        $_SESSION['msg'] = "Продукт с id = $productId заархивирован";
+        header('Location:/?page=catalogueEdit');
+    };
 };
 
 function unarchiveProduct() {
-    $productId = $_GET['productId'];
-    $sql_unarchiveProduct = "UPDATE products 
-                           SET isArchived = 'NO' 
-                           WHERE id = $productId";
-    mysqli_query(connectToSQL(), $sql_unarchiveProduct);
-    $_SESSION['msg'] = "Продукт с id = $productId разархивирован";
-    header('Location:/?page=catalogueEdit');
+    if ($_SESSION['isAdmin'] == 'YES') {
+        $productId = $_GET['productId'];
+        $sql_unarchiveProduct = "UPDATE products 
+                            SET isArchived = 'NO' 
+                            WHERE id = $productId";
+        mysqli_query(connectToSQL(), $sql_unarchiveProduct);
+        $_SESSION['msg'] = "Продукт с id = $productId разархивирован";
+        header('Location:/?page=catalogueEdit');
+    };
 };

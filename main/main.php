@@ -19,7 +19,7 @@ function countCart() {
     $cartCount = mysqli_fetch_assoc($res_countCart);
     return $cartCount['count(*)'];
 };
-if (!empty($_SESSION)) {
+if (!empty($_SESSION['isLogged'] == 'YES')) {
     $cartCount = countCart();
 };
 
@@ -65,6 +65,7 @@ if($_SESSION['isAdmin'] == 'YES') {
         <li><a href="?page=personalArea">Личный кабинет</a></li> 
         <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
         <li><a href="?page=orders">Заказы</a></li>
+        <li><a href="?page=catalogueEdit">Редактирование каталога</a></li>
     </ul>
 php;
 } else {
