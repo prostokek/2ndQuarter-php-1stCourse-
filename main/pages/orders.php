@@ -2,40 +2,45 @@
 
 // проверку на админа (если админ -- можно видеть все заказы, если нет -- только свои) ?
 function html() {
-    $title = 'История заказов';
-    $sql_orders = "SELECT id, user_id, order_items, commentary, date 
-                   FROM orders 
-                   ORDER BY date DESC";
-    $res_orders = mysqli_query(connectToSQL(), $sql_orders);
-    $content = "<h1>{$title}</h1>";
-    while ($orderData = mysqli_fetch_assoc($res_orders)) {
-        $orderDate = date('d M Y H ч. i м.', strtotime($orderData['date']));
-        $order_items = json_decode($orderData['order_items'], true); // весь массив же ещё перебрать как-то надо
-        $cartTotalCost = 0;
-        $content .= <<<php
-        <h2>Номер заказа -- {$orderData['id']}</h2>
-        <h3>Дата создания заказа: {$orderDate}</h3>
-        <h4>Товары</h4>
-php;
-        foreach($order_items as $item_id => $item) {
-            $itemTotalCost = $item['count'] * $item['price'];
-            $cartTotalCost += $itemTotalCost;
+    if ($_SESSION['isAdmin'] == 'YES') {
+        $title = 'История заказов';
+        $sql_orders = "SELECT id, user_id, order_items, commentary, date 
+                       FROM orders 
+                       ORDER BY date DESC";
+        $res_orders = mysqli_query(connectToSQL(), $sql_orders);
+        $content = "<h1>{$title}</h1>";
+        while ($orderData = mysqli_fetch_assoc($res_orders)) {
+            $orderDate = date('d M Y H ч. i м.', strtotime($orderData['date']));
+            $order_items = json_decode($orderData['order_items'], true); // весь массив же ещё перебрать как-то надо
+            $cartTotalCost = 0;
             $content .= <<<php
-        <p>
-            Название: {$item['product_name']}<br>
-            Количество: {$item['count']}<br>
-            Цена: {$item['price']}<br>
-            Стоимость позиции: {$itemTotalCost}
-        </p>
+            <h2>Номер заказа -- {$orderData['id']}</h2>
+            <h3>Дата создания заказа: {$orderDate}</h3>
+            <h4>Товары</h4>
 php;
-        }; 
-        $content .= "Стоимость заказа: {$cartTotalCost}<hr>";    
+            foreach($order_items as $item_id => $item) {
+                $itemTotalCost = $item['count'] * $item['price'];
+                $cartTotalCost += $itemTotalCost;
+                $content .= <<<php
+            <p>
+                Название: {$item['product_name']}<br>
+                Количество: {$item['count']}<br>
+                Цена: {$item['price']}<br>
+                Стоимость позиции: {$itemTotalCost}
+            </p>
+php;
+            }; 
+            $content .= "Стоимость заказа: {$cartTotalCost}<hr>";    
+        };
+        $html = [
+            'content' => $content,
+            'title' => $title
+        ];
+        return $html;
+    } else {
+        header('Location: /' . $_SERVER['HTTP_REFERER']);
+        exit;
     };
-    $html = [
-        'content' => $content,
-        'title' => $title
-    ];
-    return $html;
 };
 
 function addOrder() {

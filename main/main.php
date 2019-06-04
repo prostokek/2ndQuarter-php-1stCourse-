@@ -64,6 +64,7 @@ if($_SESSION['isAdmin'] == 'YES') {
         <li><a href="?page=cart">Корзина<i id='cartCount'>({$cartCount})</i></a></li> 
         <li><a href="?page=personalArea">Личный кабинет</a></li> 
         <li><a href="?page=registrationPage">Зарегистрироваться</a></li>
+        <li><a href="?page=orders">Заказы</a></li>
     </ul>
 php;
 } else {
