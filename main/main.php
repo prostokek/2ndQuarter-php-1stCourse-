@@ -26,12 +26,14 @@ if (!empty($_SESSION)) {
 
 
 if (isset($_GET['page']) && $_GET['page'] != 'logOut') {
-    include("/pages/{$_GET['page']}.php");
+    include("../main/pages/{$_GET['page']}.php");
 } else if ($_GET['page'] == 'logOut') {
     $_SESSION['isLogged'] = 'NO';
     $_SESSION['isAdmin'] = 'NO';
     session_destroy();
     header('Location:' . $_SERVER['HTTP_REFERER']);
+} else {
+    header('Location:/?page=welcomePage');
 };
 
 
@@ -42,7 +44,8 @@ if (! function_exists($func)) { // вместо моего query
     $func = 'html';
 }
 
-$html = $func();
+$html = (array) $func();
+// varDump($html);
 
 
 
@@ -81,7 +84,7 @@ php;
 
 
 
-$date = date(Y);
+$date = date('Y');
 $footer = <<<php
     <footer>
         Год: {$date}

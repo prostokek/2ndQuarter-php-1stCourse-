@@ -66,7 +66,7 @@ function addToCart() {
     if ($productAlrdyAdded != 'YES') {
         $sql_insertToCart = "INSERT into cart (productCatalogueId, user_id, product_name, price, picPath) 
         VALUES ({$catalogueProductData['id']},  {$_SESSION['currentUserId']}, '{$catalogueProductData['name']}', {$catalogueProductData['price']}, '{$catalogueProductData['picPath']}')";
-
+        // echo $sql_insertToCart;
         mysqli_query(connectToSQL(), $sql_insertToCart);
         // header('Location: /?page=catalogue');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

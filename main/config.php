@@ -8,7 +8,7 @@ function varDump($var) { //человеческий вывод var_dump() (не 
     }; 
 
     /* СОЗДАНИЕ ЛОГОВ */
-$date = date(r);
+$date = date('r');
 $log_count = (count(scandir(__DIR__ . '/Logs')) - 2);
 file_put_contents(__DIR__ . '/Logs/log.txt', "$date" . PHP_EOL, FILE_APPEND);
 
