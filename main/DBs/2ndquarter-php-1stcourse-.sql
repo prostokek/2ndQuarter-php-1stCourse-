@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Июн 04 2019 г., 16:46
+-- Время создания: Июн 04 2019 г., 19:40
 -- Версия сервера: 5.7.23-log
 -- Версия PHP: 7.2.10
 
@@ -79,19 +79,24 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL COMMENT 'id пользователя',
   `order_items` json NOT NULL,
   `commentary` text,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата создания заказа'
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата создания заказа',
+  `orderStatus` varchar(64) NOT NULL DEFAULT 'orderAccepted'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Заказы';
 
 --
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `order_items`, `commentary`, `date`) VALUES
-(1, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'TestSQLQuery', '2019-06-04 13:28:36'),
-(2, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing with CartClearing', '2019-06-04 13:34:26'),
-(3, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing CartClearing', '2019-06-04 13:35:36'),
-(4, 89, '[{\"count\": \"2\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"1\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}]', 'Testing', '2019-06-04 13:36:26'),
-(5, 89, '[{\"count\": \"1\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}]', 'Test', '2019-06-04 13:41:06');
+INSERT INTO `orders` (`id`, `user_id`, `order_items`, `commentary`, `date`, `orderStatus`) VALUES
+(1, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'TestSQLQuery', '2019-06-04 13:28:36', 'orderAccepted'),
+(2, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing with CartClearing', '2019-06-04 13:34:26', 'orderAccepted'),
+(3, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing CartClearing', '2019-06-04 13:35:36', 'orderAccepted'),
+(4, 89, '[{\"count\": \"2\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"1\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}]', 'Testing', '2019-06-04 13:36:26', 'orderAccepted'),
+(5, 89, '[{\"count\": \"1\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}]', 'Test', '2019-06-04 13:41:06', 'orderSent'),
+(6, 89, '[{\"count\": \"4\", \"price\": \"620\", \"user_id\": \"89\", \"product_name\": \"adminRightsTest1\"}, {\"count\": \"1\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}]', 'Testing Purchase History', '2019-06-04 14:28:18', 'orderPaid'),
+(7, 90, '[{\"count\": \"1\", \"price\": \"370\", \"user_id\": \"90\", \"product_name\": \"MySQL5.7Test\"}]', 'Test', '2019-06-04 14:40:42', 'orderPaid'),
+(8, 90, '[{\"count\": \"1\", \"price\": \"370\", \"user_id\": \"90\", \"product_name\": \"MySQL5.7Test3\"}, {\"count\": \"1\", \"price\": \"480\", \"user_id\": \"90\", \"product_name\": \"MySQL5.7Test2\"}]', '', '2019-06-04 14:48:13', 'orderPaid'),
+(9, 98, '[{\"count\": \"3\", \"price\": \"370\", \"user_id\": \"98\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"3\", \"price\": \"620\", \"user_id\": \"98\", \"product_name\": \"adminRightsTest1\"}]', 'finalTest', '2019-06-04 16:38:40', 'orderCancelled');
 
 -- --------------------------------------------------------
 
@@ -105,18 +110,20 @@ CREATE TABLE `products` (
   `price` mediumint(10) NOT NULL COMMENT 'Цена',
   `picPath` longtext NOT NULL COMMENT 'Путь к фото',
   `info` mediumtext COMMENT 'Краткая информация о товаре',
-  `detailedInfo` longtext COMMENT 'Более полная информация о товаре'
+  `detailedInfo` longtext COMMENT 'Более полная информация о товаре',
+  `isArchived` varchar(64) NOT NULL DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Товары';
 
 --
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `picPath`, `info`, `detailedInfo`) VALUES
-(25, 'MySQL5.7Test', 370, 'productsPics/nebo_svet_abstrakciya_85064_1400x1050.jpg', NULL, NULL),
-(26, 'MySQL5.7Test2', 480, 'productsPics/peyzazh_argentina_gory_ozero_patagonia_oblaka_priroda_82778_3264x2139.jpg', NULL, NULL),
-(27, 'MySQL5.7Test3', 370, 'productsPics/abstraktsiya_geometriya_figury_tsveta_93400_1600x1200.jpg', NULL, NULL),
-(28, 'adminRightsTest1', 620, 'productsPics/minimalizm_geometricheskij_pejzazh_124072_1600x1200.jpg', NULL, NULL);
+INSERT INTO `products` (`id`, `name`, `price`, `picPath`, `info`, `detailedInfo`, `isArchived`) VALUES
+(25, 'MySQL5.7Test', 370, 'productsPics/nebo_svet_abstrakciya_85064_1400x1050.jpg', NULL, NULL, 'NO'),
+(26, 'MySQL5.7Test2', 480, 'productsPics/peyzazh_argentina_gory_ozero_patagonia_oblaka_priroda_82778_3264x2139.jpg', NULL, NULL, 'NO'),
+(27, 'MySQL5.7Test3', 370, 'productsPics/abstraktsiya_geometriya_figury_tsveta_93400_1600x1200.jpg', NULL, NULL, 'NO'),
+(28, 'adminRightsTest1', 620, 'productsPics/minimalizm_geometricheskij_pejzazh_124072_1600x1200.jpg', NULL, NULL, 'NO'),
+(29, 'catalogueEdit_addingTest', 340, 'productsPics/minimalizm_kvadraty_kubiki_goluboy_fon_kuby_74400_1600x1200.jpg', NULL, NULL, 'YES');
 
 -- --------------------------------------------------------
 
@@ -163,7 +170,8 @@ INSERT INTO `users` (`id`, `fio`, `login`, `password`, `date`, `isAdmin`) VALUES
 (89, '__Admin__', 'admin', '985a4568fa416cdefe125887e7e02cf9', '2019-06-03 14:22:25', 'YES'),
 (90, 'anonymous', 'notAdminTester1', '64d0480c78d466da261fc65ec52d52e1', '2019-06-03 14:55:31', 'NO'),
 (91, 'Not an Admin, a Tester', 'notAdminTester2', '8e9e1e7a48c97956c00c132c964d5d44', '2019-06-03 15:01:53', 'NO'),
-(95, 'Not Admin Tester 4', 'notAdminTester4', 'b7343f54855b235572e6e593ae880704', '2019-06-03 15:10:32', 'NO');
+(95, 'Not Admin Tester 4', 'notAdminTester4', 'b7343f54855b235572e6e593ae880704', '2019-06-03 15:10:32', 'NO'),
+(98, 'Final Tester', 'finalTest', 'd3c4331198f3b7f8940b830c5394e57f', '2019-06-04 16:37:45', 'NO');
 
 --
 -- Индексы сохранённых таблиц
@@ -213,7 +221,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
@@ -225,13 +233,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id заказа', AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id заказа', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT для таблицы `productsfeedback`
@@ -243,7 +251,7 @@ ALTER TABLE `productsfeedback`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

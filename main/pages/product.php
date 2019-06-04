@@ -59,7 +59,6 @@ function addCommentaryToAProduct() {
         VALUES ('{$nameOfSender}', '{$commentary}', '{$productId}')";
     
         mysqli_query(connectToSQL(), $sql_addCommentary);
-        // var_dump($_POST); echo '<br>';
         header("Location: /?page=product&id={$productId}");
     };
 };

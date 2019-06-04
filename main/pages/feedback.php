@@ -42,7 +42,6 @@ function addCommentary() {
     
         $sql_addCommentary = "INSERT INTO feedback(nameOfSender, commentary)
         VALUES ('{$nameOfSender}', '{$commentary}')";
-        // echo $sql_addCommentary;
     
         mysqli_query(connectToSQL(), $sql_addCommentary);
         header('Location: /?page=feedback');

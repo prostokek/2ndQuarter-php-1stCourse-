@@ -44,11 +44,11 @@ function addUser() {
         };
         if ($count != 1) {
             mysqli_query(connectToSQL(), $sql_addUser);
-            $_SESSION['msg'] = 'Пользователь добавлен';
-            header('Location:/?page=usersAddShowDelete');
+            $_SESSION['msg'] = 'Вы успешно зарегистрировались';
+            header('Location:/?page=authPage');
         } else {
             $_SESSION['msg'] = 'Логин уже занят';
-            header('Location:/?page=usersAddShowDelete');
+            header('Location:/?page=authPage');
         };
     };
 };

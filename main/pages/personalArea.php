@@ -6,7 +6,7 @@ function html() {
         $sql_userData = "SELECT fio, login FROM users where id = {$_SESSION['currentUserId']}";
         $res_userData = mysqli_query(connectToSQL(), $sql_userData);
         $userData = mysqli_fetch_assoc($res_userData);
-        // varDump($userData);
+        
         $sql_orders = "SELECT id, user_id, order_items, commentary, date, orderStatus
                        FROM orders 
                        WHERE user_id = " . $_SESSION['currentUserId'] .
@@ -40,7 +40,6 @@ php;
             Статус заказа: {$orderData['orderStatus']}<br>
             <a href=?page=personalArea&func=cancelOrder&orderId={$orderData['id']}>Отменить заказ</a><hr>
 php;
-            // $purchaseHistory .= "<a href=?page=personalArea&func=cancelOrder&orderId={$orderData['id']}>Отменить заказ</a><hr>";
         };
 
         $content = <<<php
@@ -77,7 +76,6 @@ function cancelOrder() {
         $sql_cancelOrder = "UPDATE orders 
                             SET orderStatus = 'orderCancelled'
                             WHERE id = $orderId";
-                            // echo $sql_cancelOrder;
         mysqli_query(connectToSQL(), $sql_cancelOrder);
         $_SESSION['msg'] = 'Заказ номер ' . $orderId . ' отменён';
         header('Location:?page=personalArea');

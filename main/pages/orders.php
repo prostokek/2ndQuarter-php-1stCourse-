@@ -2,7 +2,7 @@
 function html() {
     if ($_SESSION['isAdmin'] == 'YES') {
         $title = 'История заказов';
-        $sql_orders = "SELECT id, user_id, order_items, commentary, date 
+        $sql_orders = "SELECT id, user_id, order_items, commentary, date, orderStatus
                        FROM orders 
                        ORDER BY date DESC";
         $res_orders = mysqli_query(connectToSQL(), $sql_orders);
@@ -17,7 +17,8 @@ function html() {
             <h3>Комментарий к заказу</h3>
             <p>{$orderData['commentary']}</p>
             <div>
-                <h3>Изменить статус заказа</h3>
+                <h3>Статус заказа: {$orderData['orderStatus']}</h3>
+                <h4>Изменить статус заказа</h4>
                 <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderPaid&orderId={$orderData['id']}>Заказ оплачен</a>
                 <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderSent&orderId={$orderData['id']}>Заказ отправлен</a>
                 <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderCancelled&orderId={$orderData['id']}>Заказ отменён</a>

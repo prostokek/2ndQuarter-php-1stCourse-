@@ -8,12 +8,10 @@ function html() {
         <input type='submit' value='Заказать'>
         </form>
 php;
-        
         $summaryCost = 0;
-        // $currentUserId = $_SESSION['currentUserId'];
+        
         $sql_cart = "SELECT id, productCatalogueId, user_id, product_name, count, price, picPath
-                    FROM cart"; //pic  || user_id = $currentUserId
-    
+                    FROM cart"; 
         $res_cart = mysqli_query(connectToSQL(), $sql_cart) or die(mysqli_error(connectToSQL())); 
     
         $cart = '';
@@ -56,7 +54,6 @@ php;
             'content' => $content,
             'title' => $title
         ];
-        // varDump($html);
         return $html;
     } else {
         $_SESSION['msg'] = 'Вы не зарегистрированы/залогинены';
