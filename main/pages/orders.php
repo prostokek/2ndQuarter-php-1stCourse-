@@ -16,6 +16,12 @@ function html() {
             $content .= <<<php
             <h2>Номер заказа -- {$orderData['id']}</h2>
             <h3>Дата создания заказа: {$orderDate}</h3>
+            <div>
+                <h3>Изменить статус заказа</h3>
+                <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderPaid&orderId={$orderData['id']}>Заказ оплачен</a>
+                <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderSent&orderId={$orderData['id']}>Заказ отправлен</a>
+                <a href=?page=orders&func=changeOrderStatus&updatedOrderStatus=orderCancelled&orderId={$orderData['id']}>Заказ отменён</a>
+            </div>
             <h4>Товары</h4>
 php;
             foreach($order_items as $item_id => $item) {
@@ -79,4 +85,28 @@ function clearCart() {
     global $returnToLocation;
     header('Location:?page=cart');
     exit;
+};
+
+// function orderSent() {
+//     $orderId = $_GET['orderId'];
+    // $sql_updateOrderStatus = "UPDATE orders 
+    //                           SET orderStatus = orderSent 
+    //                           WHERE ";
+// }
+
+
+function changeOrderStatus() {
+    $orderStatus = $_GET['updatedOrderStatus'];
+    $orderId = $_GET['orderId'];
+    $sql_updateOrderStatus = "UPDATE orders 
+                              SET orderStatus = '{$orderStatus}'
+                              WHERE id = $orderId";
+    mysqli_query(connectToSQL(), $sql_updateOrderStatus);
+    $_SESSION['msg'] = 'Статус заказа номер ' . $orderId . ' изменён на: ';
+    switch($orderStatus) {
+        case 'orderPaid': $_SESSION['msg'] .= '"Заказ оплачен"'; break;
+        case 'orderSent': $_SESSION['msg'] .= '"Заказ отправлен"'; break;
+        case 'orderCancelled': $_SESSION['msg'] .= '"Заказ отменён"'; break;
+    }
+    header('Location:?page=orders');
 };
