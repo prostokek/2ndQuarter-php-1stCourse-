@@ -7,7 +7,7 @@ function html() {
         $res_userData = mysqli_query(connectToSQL(), $sql_userData);
         $userData = mysqli_fetch_assoc($res_userData);
         // varDump($userData);
-        $sql_orders = "SELECT id, user_id, order_items, commentary, date 
+        $sql_orders = "SELECT id, user_id, order_items, commentary, date, orderStatus
                        FROM orders 
                        WHERE user_id = " . $_SESSION['currentUserId'] .
                        " ORDER BY date DESC ";
@@ -30,11 +30,17 @@ php;
                 Название: {$item['product_name']}<br>
                 Количество: {$item['count']}<br>
                 Цена: {$item['price']}<br>
-                Стоимость позиции: {$itemTotalCost}
+                Стоимость позиции: {$itemTotalCost} <br>
             </p>
 php;
             }; 
-            $purchaseHistory .= "Стоимость заказа: {$cartTotalCost}<hr>";    
+            $purchaseHistory .= <<<php
+            Комментарий к заказу: {$orderData['commentary']}<br>
+            Стоимость заказа: {$cartTotalCost}<br>
+            Статус заказа: {$orderData['orderStatus']}<br>
+            <a href=?page=personalArea&func=cancelOrder&orderId={$orderData['id']}>Отменить заказ</a><hr>
+php;
+            // $purchaseHistory .= "<a href=?page=personalArea&func=cancelOrder&orderId={$orderData['id']}>Отменить заказ</a><hr>";
         };
 
         $content = <<<php
@@ -55,4 +61,34 @@ php;
         'title' => $title
     ];
     return $html;
+};
+
+function cancelOrder() {
+    $orderId = $_GET['orderId'];
+    $sql_orders = "SELECT orderStatus
+                   FROM orders 
+                   WHERE id = $orderId";
+                   $_SESSION['msg'] = $sql_orders;
+    $res_orders = mysqli_query(connectToSQL(), $sql_orders);
+    $orderStatus = mysqli_fetch_assoc($res_orders);
+
+
+    if ($orderStatus['orderStatus'] == 'orderAccepted') {
+        $sql_cancelOrder = "UPDATE orders 
+                            SET orderStatus = 'orderCancelled'
+                            WHERE id = $orderId";
+                            // echo $sql_cancelOrder;
+        mysqli_query(connectToSQL(), $sql_cancelOrder);
+        $_SESSION['msg'] = 'Заказ номер ' . $orderId . ' отменён';
+        header('Location:?page=personalArea');
+    } else if ($orderStatus['orderStatus'] == 'orderSent') {
+        $_SESSION['msg'] = 'Заказ уже отправлен, его нельзя отменить';
+        header('Location:?page=personalArea');
+    } else if ($orderStatus['orderStatus'] == 'orderPaid') {
+        $_SESSION['msg'] = 'Заказ оплачен, для его отмены Вам нужно связаться с администрацией (это пример/заглушка)';
+        header('Location:?page=personalArea');
+    } else if ($orderStatus['orderStatus'] == 'orderCancelled') {
+        $_SESSION['msg'] = "Заказ номер $orderId уже был отменён";
+        header('Location:?page=personalArea');
+    }; //switch, наверное, был бы к месту, но так мне больше нравится (пока, во всяком случае)
 };
