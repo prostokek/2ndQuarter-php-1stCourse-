@@ -1,6 +1,38 @@
 <?php
-function html() {
 
+// проверку на админа (если админ -- можно видеть все заказы, если нет -- только свои) ?
+function html() {
+    $title = 'История заказов';
+    $sql_orders = "SELECT id, user_id, order_items, commentary, date 
+                   FROM orders 
+                   ORDER BY date DESC";
+    $res_orders = mysqli_query(connectToSQL(), $sql_orders);
+    $content = "<h1>{$title}</h1>";
+    while ($orderData = mysqli_fetch_assoc($res_orders)) {
+        $orderDate = date('d M Y H ч. i м.', strtotime($orderData['date']));
+        $order_items = json_decode($orderData['order_items'], true); // весь массив же ещё перебрать как-то надо
+        $content .= <<<php
+        <h2>Номер заказа -- {$orderData['id']}</h2>
+        <h3>Дата создания заказа: {$orderDate}</h3>
+        <h4>Товары</h4>
+php;
+        foreach($order_items as $item_id => $item) {
+            // echo $item['count'] . $item['price'] . $item['product_name'];
+            $content .= <<<php
+        <p>
+            Название: {$item['product_name']}<br>
+            Количество: {$item['count']}<br>
+            Цена: {$item['price']}<br>
+        </p>
+php;
+        }; 
+        $content .= '<hr>';    
+    };
+    $html = [
+        'content' => $content,
+        'title' => $title
+    ];
+    return $html;
 };
 
 function addOrder() {
