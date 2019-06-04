@@ -15,17 +15,21 @@ function addOrder() {
                 array_push($order_items, $cartProductData);
                 // $order_items = $cartProductData; //то же самое, но менее наглядно
             };
-    }; // создал массив с корзиной, как у преподователя в сессии
+        }; // создал массив с корзиной, как у преподователя в сессии
     
-    $commentary = clearStr($_POST['commentary']);
-    
-    $order_items = json_encode($order_items, JSON_UNESCAPED_UNICODE);
-    $sql_addOrder = "INSERT INTO orders(user_id, order_items, commentary) 
-                     VALUES ({$_SESSION['currentUserId']}, '{$order_items}', '{$commentary}')";
-    mysqli_query(connectToSQL(), $sql_addOrder);
-    
-    $_SESSION['msg'] = 'Заказ был создан';
-    header('Location:/?page=orders&func=clearCart');
+        $commentary = clearStr($_POST['commentary']);
+        if(!empty($order_items)) {
+            $order_items = json_encode($order_items, JSON_UNESCAPED_UNICODE);
+            $sql_addOrder = "INSERT INTO orders(user_id, order_items, commentary) 
+                            VALUES ({$_SESSION['currentUserId']}, '{$order_items}', '{$commentary}')";
+            mysqli_query(connectToSQL(), $sql_addOrder);
+            
+            $_SESSION['msg'] = 'Ваш заказ принят, его номер -- ' . mysqli_insert_id(connectToSQL());
+            header('Location:/?page=orders&func=clearCart');
+        } else {
+            $_SESSION['msg'] = 'Ваша корзина пуста, заказ не может быть создан';
+            header('Location:/?page=cart');
+        };
     };
 };
 

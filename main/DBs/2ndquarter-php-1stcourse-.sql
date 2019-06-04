@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июн 03 2019 г., 18:16
+-- Хост: localhost
+-- Время создания: Июн 04 2019 г., 16:46
 -- Версия сервера: 5.7.23-log
--- Версия PHP: 5.5.38
+-- Версия PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,9 +43,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `productCatalogueId`, `user_id`, `product_name`, `count`, `price`, `picPath`) VALUES
-(110, 25, 89, 'MySQL5.7Test', 2, 370, 'productsPics/nebo_svet_abstrakciya_85064_1400x1050.jpg'),
-(111, 27, 89, 'MySQL5.7Test3', 1, 370, 'productsPics/abstraktsiya_geometriya_figury_tsveta_93400_1600x1200.jpg'),
-(112, 25, 95, 'MySQL5.7Test', 2, 370, 'productsPics/nebo_svet_abstrakciya_85064_1400x1050.jpg');
+(112, 25, 95, 'MySQL5.7Test', 4, 370, 'productsPics/nebo_svet_abstrakciya_85064_1400x1050.jpg');
 
 -- --------------------------------------------------------
 
@@ -67,7 +65,33 @@ CREATE TABLE `feedback` (
 INSERT INTO `feedback` (`id`, `nameOfSender`, `commentary`, `date`) VALUES
 (16, 'MySQL5.7Tester1', 'Testing with new version of MySQL (5.6 => 5.7)', '2019-06-03 14:05:48'),
 (17, 'MySQL5.7Tester1', 'Testing with new version of MySQL (5.6 => 5.7) [2]', '2019-06-03 14:10:22'),
-(18, 'MySQL5.7Tester3', 'Testing with new version of MySQL (5.6 => 5.7) [3]', '2019-06-03 14:12:34');
+(18, 'MySQL5.7Tester3', 'Testing with new version of MySQL (5.6 => 5.7) [3]', '2019-06-03 14:12:34'),
+(19, 'MySQL5.7Tester5', 'sssssss', '2019-06-03 17:13:13');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL COMMENT 'id заказа',
+  `user_id` int(11) NOT NULL COMMENT 'id пользователя',
+  `order_items` json NOT NULL,
+  `commentary` text,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата создания заказа'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Заказы';
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `order_items`, `commentary`, `date`) VALUES
+(1, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'TestSQLQuery', '2019-06-04 13:28:36'),
+(2, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing with CartClearing', '2019-06-04 13:34:26'),
+(3, 89, '[{\"count\": \"4\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"2\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}, {\"count\": \"3\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test3\"}]', 'Testing CartClearing', '2019-06-04 13:35:36'),
+(4, 89, '[{\"count\": \"2\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}, {\"count\": \"1\", \"price\": \"480\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test2\"}]', 'Testing', '2019-06-04 13:36:26'),
+(5, 89, '[{\"count\": \"1\", \"price\": \"370\", \"user_id\": \"89\", \"product_name\": \"MySQL5.7Test\"}]', 'Test', '2019-06-04 13:41:06');
 
 -- --------------------------------------------------------
 
@@ -158,6 +182,12 @@ ALTER TABLE `feedback`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
@@ -183,13 +213,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id заказа', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
