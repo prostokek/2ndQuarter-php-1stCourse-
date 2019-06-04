@@ -13,7 +13,6 @@ function html() {
                 <br>
                 <input type = 'submit' value = 'Добавить продукт'>
             </form>
-        </article>
 php;
 
         $html = [
